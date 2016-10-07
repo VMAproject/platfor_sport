@@ -1,6 +1,6 @@
 package com.sport.mvc;
 
-import static org.junit.Assert.*;
+
 
 public class StartControllerTest {
 
