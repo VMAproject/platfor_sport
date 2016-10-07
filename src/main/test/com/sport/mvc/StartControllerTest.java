@@ -1,15 +1,17 @@
 package com.sport.mvc;
 
+import org.junit.Test;
 
+import static org.junit.Assert.*;
 
 public class StartControllerTest {
 
-    @org.junit.Test
+    @Test
     public void testShowIndexStartPage() throws Exception {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testShowChooseForm() throws Exception {
 
     }
