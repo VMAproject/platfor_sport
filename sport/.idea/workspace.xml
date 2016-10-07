@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f2975fe-f550-480c-8932-a7882ea7a5d4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_39.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_2_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_2_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/context.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/general_registration_formRegistry.jsp" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport.war" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\META-INF\MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\aopalliance-1.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\commons-logging-1.1.3.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\servlet-api-2.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\spring-aop-4.1.1.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\spring-beans-4.1.1.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\spring-context-4.1.1.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\spring-core-4.1.1.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\spring-expression-4.1.1.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\spring-web-4.1.1.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\lib\spring-webmvc-4.1.1.RELEASE.jar" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\mvc-dispatcher-servlet.xml" afterPath="" />
-      <change type="DELETED" beforePath="D:\aGitProjectRepozit\platfor_sport\sport\target\sport\WEB-INF\web.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sport.iml" afterPath="$PROJECT_DIR$/sport.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/sport_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/sport_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="5f2975fe-f550-480c-8932-a7882ea7a5d4" name="Default" comment="" />
     <ignored path="sport.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -828,7 +800,7 @@
       <workItem from="1475658351843" duration="537000" />
       <workItem from="1475659188600" duration="741000" />
       <workItem from="1475757150242" duration="8417000" />
-      <workItem from="1475843340246" duration="1499000" />
+      <workItem from="1475843340246" duration="1824000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1475658671361</created>
@@ -870,7 +842,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11295000" />
+    <option name="totallyTimeSpent" value="11620000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1364" height="722" extended-state="0" />
