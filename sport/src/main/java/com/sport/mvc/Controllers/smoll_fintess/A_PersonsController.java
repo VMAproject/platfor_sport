@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/registerPerson/")
-public class PersonsController {
+public class A_PersonsController {
 
 
     @RequestMapping("/general_registration_form")
