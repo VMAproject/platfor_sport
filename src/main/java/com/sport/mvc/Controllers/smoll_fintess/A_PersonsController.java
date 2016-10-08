@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registerPerson/")
 public class A_PersonsController {
 
-
+    //returns general registration form page
     @RequestMapping("/general_registration_form")
     public String showForm(Model model){
 
@@ -21,7 +21,7 @@ public class A_PersonsController {
         return "general_registration_formRegistry";
 
     }
-
+    //starts first work page
     @RequestMapping("/showFirstWorkPage")
 //    public String showDataForm(@ModelAttribute("registerPersonDate") RegisterPerson registerPerson){
     public String showFirstWorkPage(){
