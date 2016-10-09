@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class HibernateAbstractDao<T extends Model> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+//    @Autowired
+    private SessionFactory sessionFactory ;
 
     private Class<T> clazz;
 
