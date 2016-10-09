@@ -12,7 +12,7 @@ public class StartController {
         return "index";
     }
 
-    //
+    ////
 
     //returns chooseregistration form page
     @RequestMapping("/showChooseRegisterForm")
