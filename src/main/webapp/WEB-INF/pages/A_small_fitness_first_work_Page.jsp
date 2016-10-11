@@ -88,7 +88,7 @@ background: #cccccc; "  >
     <br/><br/>
     <br/><br/>
 
-<form:form>
+
 
 
 
@@ -106,16 +106,21 @@ background: #cccccc; "  >
             <th>должность</th>
             <th>комментарий</th>
            <th><input type="checkbox"></th>
+
+        <c:forEach var="tempCustomer" items="${customers}">
             <tr>
-                <td>Alex</td>
-                <td>Linov</td>
+
+                <td>${tempCustomer.firstName}</td>
+                <td>${tempCustomer.lastName}</td>
                 <td></td>
-                <td></td>
+                <td>${tempCustomer.email}</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td>checbox</td>
             </tr>
+        </c:forEach>
+        </c>
 
     </table>
     
@@ -123,8 +128,7 @@ background: #cccccc; "  >
     
     
     
-    
-</form:form>
+
 
 
 <br><br>
