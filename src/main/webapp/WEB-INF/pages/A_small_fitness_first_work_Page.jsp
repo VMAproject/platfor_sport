@@ -78,7 +78,10 @@ background: #cccccc; "  >
 
 
 
-    <input type="button" value="добавить">
+    <input type="button" value="Add Customer"
+           onclick="window.location.href='showFormForAdd'; return false;"
+           class="add-button"
+    />
     <input type="button" value="удалить">
     <input type="button" value="Отправить смс">
     <input type="button" value="отправить письмо">
@@ -118,6 +121,24 @@ background: #cccccc; "  >
                 <td></td>
                 <td></td>
                 <td>checbox</td>
+                <td>
+                    <!-- construct an "update" link with customer id -->
+                    <c:url var="updateLink" value="/registerPerson//showFormForUpdate" >
+                        <c:param name="customerId" value="${tempCustomer.id}"/>
+                    </c:url>
+
+                    <!-- construct an "update" link with customer id -->
+                    <c:url var="deleteLink" value="/registerPerson//delete" >
+                        <c:param name="customerId" value="${tempCustomer.id}"/>
+                    </c:url>
+
+                    <!-- display the update link -->
+                    <a href="${updateLink}">Update</a>
+                    |
+                    <a href="${deleteLink}"
+                       onclick="if (!(confirm('Are you sure you want to delete this student?'))) return false">
+                        Delete</a>
+                </td>
             </tr>
         </c:forEach>
         </c>
