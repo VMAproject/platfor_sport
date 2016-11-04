@@ -40,6 +40,7 @@ public class Student extends Model {
         this.groupSort = groupSort;
     }
 
+    @Deprecated
     @Column(name = "group_sort")
     private  String groupSort;
 

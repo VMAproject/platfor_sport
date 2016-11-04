@@ -13,6 +13,7 @@ public class Group extends Model {
     @Column(name = "name")
     private String name;
 
+    @Deprecated
     @Column(name = "nameTraine")
     private String nameTraine;
 

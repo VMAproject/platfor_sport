@@ -17,6 +17,7 @@ public class CategoryGroup extends Model {
     @Column(name = "name")
     private String name;
 
+    @Deprecated
     @Column(name = "nameTraine")
     private String nameTraine;
 
