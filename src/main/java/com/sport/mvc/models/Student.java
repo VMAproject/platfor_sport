@@ -43,9 +43,6 @@ public class Student extends Model {
     @Email
     private String email;
 
-
-
-
     @Column(name = "birthday")
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @Past

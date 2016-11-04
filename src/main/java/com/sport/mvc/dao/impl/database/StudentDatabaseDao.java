@@ -14,8 +14,6 @@ public class StudentDatabaseDao extends HibernateAbstractDao<Student> implements
     public StudentDatabaseDao() {
     }
 
-
-
 }
 
 

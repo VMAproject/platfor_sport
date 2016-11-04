@@ -17,6 +17,7 @@ public class CategoryGroup extends Model {
     @Column(name = "name")
     private String name;
 
+<<<<<<< HEAD
     @Column(name = "is_main")
     private boolean isMain;
 
