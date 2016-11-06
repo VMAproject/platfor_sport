@@ -1,12 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<%--<%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>--%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <html>
 <head>
     <title>Add new user</title>
     <spring:url value="/resources/css/first_work_page_forOther.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
@@ -47,14 +50,14 @@
 <div class="container addstudent_form">
     <h1>Add student</h1>
     <br>
-    <form:form action="saveStudent" modelAttribute="student" method="POST" >
+    <form:form action="saveStudent" modelAttribute="student" method="POST"  >
         <form:hidden path="id" />
 
         <table>
             <tbody>
             <tr>
                 <td><label>Имя:</label></td>
-                <td><form:input path="name" />
+                <td><form:input path="name"  />
                     <form:errors path="name" class="alert alert-danger"></form:errors>
                 </td>
             </tr>

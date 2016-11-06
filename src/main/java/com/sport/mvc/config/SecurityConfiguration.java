@@ -34,7 +34,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
             http.authorizeRequests()
 					.antMatchers("A_small_fitness_first_work_Page.jsp").authenticated()
-
 					.antMatchers("index.jsp").permitAll()
 					.and().formLogin().loginPage("/login")
                     .usernameParameter("username")
