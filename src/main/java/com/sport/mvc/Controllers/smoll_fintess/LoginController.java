@@ -7,6 +7,7 @@ import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,9 @@ public class LoginController {
 	
 	@Autowired
 	UserService userservice;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
@@ -43,6 +47,8 @@ public class LoginController {
 		user.setIsnonexpired("Y");
 		user.setIsnonlocked("Y");
 
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
 
         Boolean save = userservice.addUser(user);
 
