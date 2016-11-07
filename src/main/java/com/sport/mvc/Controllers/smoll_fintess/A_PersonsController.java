@@ -99,7 +99,7 @@ public class A_PersonsController {
 
 
   }
-
+//check
   for(Group g: groupService.getAll()){
       if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
           groupsList.add(g);
