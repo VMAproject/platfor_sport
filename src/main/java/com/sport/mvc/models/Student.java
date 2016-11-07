@@ -28,21 +28,20 @@ public class Student extends Model {
     @Column(name = "surname")
     private String surname;
 
+    @Column(name = "record_day")
+    private String recordDay;
+
+    @Column(name = "comments")
+    private String comments;
+
+    @Column(name = "post")
+    private String post;
+
+
+
     @Column(name = "email")
     @Email
     private String email;
-
-    public String getGroupSort() {
-        return groupSort;
-    }
-
-    public void setGroupSort(String groupSort) {
-        this.groupSort = groupSort;
-    }
-
-    @Deprecated
-    @Column(name = "group_sort")
-    private  String groupSort;
 
     @Column(name = "birthday")
     @DateTimeFormat(pattern="dd/MM/yyyy")
@@ -77,6 +76,18 @@ public class Student extends Model {
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "status_id")
     private Status status;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Student() {
         super();
@@ -171,42 +182,30 @@ public class Student extends Model {
         return phone;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Student student = (Student) o;
-
-        if (name != null ? !name.equals(student.name) : student.name != null) return false;
-        if (surname != null ? !surname.equals(student.surname) : student.surname != null) return false;
-        if (email != null ? !email.equals(student.email) : student.email != null) return false;
-        if (groupSort != null ? !groupSort.equals(student.groupSort) : student.groupSort != null) return false;
-        if (birthday != null ? !birthday.equals(student.birthday) : student.birthday != null) return false;
-        if (strBirthday != null ? !strBirthday.equals(student.strBirthday) : student.strBirthday != null) return false;
-        if (age != null ? !age.equals(student.age) : student.age != null) return false;
-        if (phone != null ? !phone.equals(student.phone) : student.phone != null) return false;
-        if (groups != null ? !groups.equals(student.groups) : student.groups != null) return false;
-        if (sports != null ? !sports.equals(student.sports) : student.sports != null) return false;
-        if (cards != null ? !cards.equals(student.cards) : student.cards != null) return false;
-        return status != null ? status.equals(student.status) : student.status == null;
-
+    public String getRecordDay() {
+        return recordDay;
     }
 
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (groupSort != null ? groupSort.hashCode() : 0);
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (strBirthday != null ? strBirthday.hashCode() : 0);
-        result = 31 * result + (age != null ? age.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (groups != null ? groups.hashCode() : 0);
-        result = 31 * result + (sports != null ? sports.hashCode() : 0);
-        result = 31 * result + (cards != null ? cards.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        return result;
+    public void setRecordDay(String recordDay) {
+        this.recordDay = recordDay;
     }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+
 }

@@ -16,7 +16,7 @@
 <center>
     <h3>${message}</h3>
     <br>
-    <a href="<c:url value="/"></c:url>">Back to the main</a>
+    <a href="<c:url value="/registerPerson//showFirstWorkPage"></c:url>">Back to the main</a>
 </center>
 </body>
 </html>

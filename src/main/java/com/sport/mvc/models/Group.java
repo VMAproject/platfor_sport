@@ -10,12 +10,12 @@ public class Group extends Model {
 
     private static final long serialVersionUID = 5110150966894003873L;
 
+
+    @Column(name = "is_main")
+    private boolean isMain;
+
     @Column(name = "name")
     private String name;
-
-    @Deprecated
-    @Column(name = "nameTraine")
-    private String nameTraine;
 
     @Column(name = "discription")
     private String discription;
@@ -79,38 +79,13 @@ public class Group extends Model {
         this.students = students;
     }
 
-    public String getNameTraine() {
-        return nameTraine;
+    public boolean isMain() {
+        return isMain;
     }
 
-    public void setNameTraine(String nameTraine) {
-        this.nameTraine = nameTraine;
+    public void setMain(boolean main) {
+        isMain = main;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Group group = (Group) o;
-
-        if (name != null ? !name.equals(group.name) : group.name != null) return false;
-        if (nameTraine != null ? !nameTraine.equals(group.nameTraine) : group.nameTraine != null) return false;
-        if (discription != null ? !discription.equals(group.discription) : group.discription != null) return false;
-        if (user != null ? !user.equals(group.user) : group.user != null) return false;
-        if (students != null ? !students.equals(group.students) : group.students != null) return false;
-        return categoryGroup != null ? categoryGroup.equals(group.categoryGroup) : group.categoryGroup == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (nameTraine != null ? nameTraine.hashCode() : 0);
-        result = 31 * result + (discription != null ? discription.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (students != null ? students.hashCode() : 0);
-        result = 31 * result + (categoryGroup != null ? categoryGroup.hashCode() : 0);
-        return result;
-    }
 }

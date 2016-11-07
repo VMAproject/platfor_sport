@@ -71,7 +71,7 @@
         <tbody>
         <tr class="active">
             <td>I want to register like a trainer</td>
-            <td><a href="/registerPerson//registerTrainer"> REGISTER </a> </td>
+            <td><a href="/home"> REGISTER </a> </td>
         </tr>
         <tr class="success">
             <td>I want to register as a fitness center</td>

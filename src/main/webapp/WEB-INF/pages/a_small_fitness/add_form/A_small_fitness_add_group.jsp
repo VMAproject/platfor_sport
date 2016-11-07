@@ -54,19 +54,19 @@
             </tr>
 
             <tr>
-            <select name="option">
-                <option value="">выберите категорию</option>
-                <c:forEach items="${categoryList}" var="category">
-                    <c:if test="${category.name!=null}">
-                    <option value="${category.name}">
-                        <c:out value="${category.name}"/>
-                    </option>
-                    </c:if>
-                </c:forEach>
-            </select>
-                </tr>
+                <select name="option">
+                    <option value="">выберите категорию</option>
+                    <c:forEach items="${categoryList}" var="category">
+                        <c:if test="${category.main==true}">
+                            <option value="${category.name}">
+                                <c:out value="${category.name}"/>
+                            </option>
+                        </c:if>
+                    </c:forEach>
+                </select>
+            </tr>
             <tr>
-            <td><label></label></td>
+                <td><label></label></td>
                 <td><input type="submit" value="Save" class="save" /></td>
             </tr>
 

@@ -20,8 +20,8 @@ public class SessionHistory extends Model {
     @Column(name = "browser")
     private String browser;
 
-    @OneToMany(mappedBy = "sessionHistory" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<User> users = new HashSet<>();
+//    @OneToMany(mappedBy = "sessionHistory" , cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<User> users = new HashSet<>();
 
     public SessionHistory() {
         super();
@@ -51,34 +51,34 @@ public class SessionHistory extends Model {
         this.sessionDate = sessionDate;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SessionHistory that = (SessionHistory) o;
-
-        if (sessionDate != null ? !sessionDate.equals(that.sessionDate) : that.sessionDate != null) return false;
-        if (ip != null ? !ip.equals(that.ip) : that.ip != null) return false;
-        if (browser != null ? !browser.equals(that.browser) : that.browser != null) return false;
-        return users != null ? users.equals(that.users) : that.users == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = sessionDate != null ? sessionDate.hashCode() : 0;
-        result = 31 * result + (ip != null ? ip.hashCode() : 0);
-        result = 31 * result + (browser != null ? browser.hashCode() : 0);
-        result = 31 * result + (users != null ? users.hashCode() : 0);
-        return result;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        SessionHistory that = (SessionHistory) o;
+//
+//        if (sessionDate != null ? !sessionDate.equals(that.sessionDate) : that.sessionDate != null) return false;
+//        if (ip != null ? !ip.equals(that.ip) : that.ip != null) return false;
+//        if (browser != null ? !browser.equals(that.browser) : that.browser != null) return false;
+//        return users != null ? users.equals(that.users) : that.users == null;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = sessionDate != null ? sessionDate.hashCode() : 0;
+//        result = 31 * result + (ip != null ? ip.hashCode() : 0);
+//        result = 31 * result + (browser != null ? browser.hashCode() : 0);
+//        result = 31 * result + (users != null ? users.hashCode() : 0);
+//        return result;
+//    }
 }

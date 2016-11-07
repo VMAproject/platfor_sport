@@ -29,4 +29,13 @@ public class RoleFileDao extends FileAbstractDao<Role> implements RoleDao {
     }
 
 
+    @Override
+    public boolean roleExists(String roleName) {
+        return false;
+    }
+
+    @Override
+    public boolean addRole(Role role) {
+        return false;
+    }
 }

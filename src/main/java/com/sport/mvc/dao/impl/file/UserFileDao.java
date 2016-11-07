@@ -32,4 +32,18 @@ public class UserFileDao extends FileAbstractDao<User> implements UserDao {
     }
 
 
+    @Override
+    public boolean addUser(User model) {
+        return false;
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public boolean userExists(String username) {
+        return false;
+    }
 }

@@ -86,37 +86,37 @@ public class Price extends Model{
     public Set<User> getUsers() {
         return users;
     }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Price price = (Price) o;
-
-        if (priceMonth != price.priceMonth) return false;
-        if (priceSingle != price.priceSingle) return false;
-        if (priceMonthHalf != price.priceMonthHalf) return false;
-        if (name != null ? !name.equals(price.name) : price.name != null) return false;
-        if (discription != null ? !discription.equals(price.discription) : price.discription != null) return false;
-        if (cards != null ? !cards.equals(price.cards) : price.cards != null) return false;
-        return users != null ? users.equals(price.users) : price.users == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (discription != null ? discription.hashCode() : 0);
-        result = 31 * result + priceMonth;
-        result = 31 * result + priceSingle;
-        result = 31 * result + priceMonthHalf;
-        result = 31 * result + (cards != null ? cards.hashCode() : 0);
-        result = 31 * result + (users != null ? users.hashCode() : 0);
-        return result;
-    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Price price = (Price) o;
+//
+//        if (priceMonth != price.priceMonth) return false;
+//        if (priceSingle != price.priceSingle) return false;
+//        if (priceMonthHalf != price.priceMonthHalf) return false;
+//        if (name != null ? !name.equals(price.name) : price.name != null) return false;
+//        if (discription != null ? !discription.equals(price.discription) : price.discription != null) return false;
+//        if (cards != null ? !cards.equals(price.cards) : price.cards != null) return false;
+//        return users != null ? users.equals(price.users) : price.users == null;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = name != null ? name.hashCode() : 0;
+//        result = 31 * result + (discription != null ? discription.hashCode() : 0);
+//        result = 31 * result + priceMonth;
+//        result = 31 * result + priceSingle;
+//        result = 31 * result + priceMonthHalf;
+//        result = 31 * result + (cards != null ? cards.hashCode() : 0);
+//        result = 31 * result + (users != null ? users.hashCode() : 0);
+//        return result;
+//    }
 }

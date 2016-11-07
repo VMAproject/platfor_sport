@@ -3,15 +3,22 @@ package com.sport.mvc.Controllers.smoll_fintess;
 
 import com.sport.mvc.models.CategoryGroup;
 import com.sport.mvc.models.Group;
+import com.sport.mvc.models.User;
 import com.sport.mvc.services.CategoryGroupService;
 import com.sport.mvc.services.GroupService;
+import com.sport.mvc.services.UserService;
 import com.sport.mvc.socialAdvertisement.SendMailService;
 
 import com.sport.mvc.models.Student;
 import com.sport.mvc.services.StudentService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.acls.model.NotFoundException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +48,10 @@ public class A_PersonsController {
     private GroupService groupService;
 
     @Autowired
+    @Qualifier("userService")
+    private UserService userService;
+
+    @Autowired
     @Qualifier("categoryGroupService")
     private CategoryGroupService categoryService;
 
@@ -48,14 +59,7 @@ public class A_PersonsController {
     @Qualifier("mail")
     private SendMailService sendMailService;
 
-    @RequestMapping(value = "/general_registration_form")
-    public String showForm(Model model){
 
-        //   RegisterPerson theRegisterPerson= new RegisterPerson();
-        //   model.addAttribute("registerPersonDate", theRegisterPerson);
-        return "general_registration_formRegistry";
-
-    }
 
     //method for jump register page FITNESS CENTRE =)
     @RequestMapping(value = "/registerFitnessCenter")
@@ -78,31 +82,47 @@ public class A_PersonsController {
         return "register_pages/registerTrainer";
     }
 
-    private Long idGroup;
-
-
     @RequestMapping(value = "/showFirstWorkPage",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView workPage(){
-        //add atribute to group
-        //create list student and group for add data to the jsp page
-        List<CategoryGroup> categoryGroupList = categoryService.getAll();
-        List<Group> groupsList = groupService.getAll();
-        List<Student> studentsList=studentService.getAll();
-
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("students", studentsList);
-        modelAndView.addObject("groupsList", groupsList);
-        modelAndView.addObject("categoryList",categoryGroupList);
-//param for identifying locations is ->String chooseGroup
-       if(idGroup!=null) {
-        String chooseGroup = groupService.getGroup(idGroup).getName();
-        modelAndView.addObject("chooseNewGroup", chooseGroup);
-                        }
 
-        if(idGroup!=null) {
-            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getNameTraine();
-            modelAndView.addObject("chooseNewGroupTrainer", chooseNewGroupTrainer);
+        //create list student,category of group and group for add data to the jsp page
+        List<CategoryGroup> categoryGroupList = new ArrayList<>();
+        List<Group> groupsList = new ArrayList<>();
+        List<Student> studentsList= new ArrayList<>();
+//check, if user has this student, add to student list
+  for(Student s: studentService.getAll()) {
+
+      if (s.getUser().getId()!=null && s.getUser().getId() == getCurrentUser().getId() ) {
+              studentsList.add(s);
+          }
+
+
+  }
+//check
+  for(Group g: groupService.getAll()){
+      if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
+          groupsList.add(g);
+      }
+  }
+
+  if (!studentsList.isEmpty()) {
+      modelAndView.addObject("students", studentsList);
+  }
+  if(!groupsList.isEmpty()) {
+      modelAndView.addObject("groupsList", groupsList);
+  }
+
+        for(CategoryGroup g: categoryService.getAll()){
+            if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
+                categoryGroupList.add(g);
+            }
         }
+
+  if(!categoryGroupList.isEmpty()) {
+      modelAndView.addObject("categoryList", categoryGroupList);
+  }
+
 
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
@@ -124,7 +144,6 @@ public class A_PersonsController {
 
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
-
         // create model attribute to bind form data
         Student theStudent = new Student();
         theModel.addAttribute("student", theStudent);
@@ -134,24 +153,106 @@ public class A_PersonsController {
 
     @PostMapping("/saveStudent")
     public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+        // add date(when user do this record
+        Date today = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        theStudent.setRecordDay(dateFormat.format(today));
+        theStudent.setUser(getCurrentUser());
+
         if(result.hasErrors()) {
             return "a_small_fitness/add_form/A_small_fitness_add_student";
         }
-        groupService.getAll();
 
         studentService.addStudent(theStudent);
         return "redirect:/registerPerson/showFormForAdd";
     }
 
-    @RequestMapping("/delete")
-    public String deleteListOfUsers(@RequestParam(value = "deletee", required = false) String deletee,
+//    @RequestMapping("/delete")
+//    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String deletee,
+//                                    @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
+//                                    @RequestParam(value = "case", required = false) List <Long> ids,
+//                                    @RequestParam(value = "send_complex_email", required = false) String complexEmail,
+//                                    RedirectAttributes ra) {
+//
+//
+//        if(deletee!=null){
+//            if (ids!=null)
+//
+//                for (int i =0; i < ids.size();i++) {
+//                    System.out.println("in method A_controller del " + ids );
+//                    studentService.deleteListOfStudents(ids.get(i));
+//                }
+//        }
+//        else if (complexEmail!=null) {
+//            //redirect ids to the send complex message page
+//            ra.addFlashAttribute("id", ids);
+//            return "redirect:/registerPerson/showComplexMailForm";
+//        }
+//
+//        else if(sendEmail!=null){
+//            //redirect our ids to the send message page
+//            ra.addFlashAttribute("id", ids);
+//            return "redirect:/registerPerson/showMailForm";
+//
+//
+//        }
+//
+//        return "redirect:/registerPerson/showFirstWorkPage";
+//    }
+
+
+    @RequestMapping(value = "/act", method = RequestMethod.POST)
+    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String delete,
                                     @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
                                     @RequestParam(value = "case", required = false) List <Long> ids,
                                     @RequestParam(value = "send_complex_email", required = false) String complexEmail,
+                                    @RequestParam(value = "addToGroup", required = false) String addToGroup,
+                                    @RequestParam(value = "option1", required = false) String groupName,
+                                    @RequestParam(value = "option2", required = false) String trainerGroupName,
+                                    @RequestParam(value = "addToTrainerGroup", required = false) String addToTrainerGroup,
                                     RedirectAttributes ra) {
+        if (addToGroup!=null) {
+            Long groupId = null;
+            Set<Group> groupSet = new HashSet<>();
+            List<Group> groups = groupService.getAll();
+            for (int i = 0; i<groups.size(); i++) {
+                if (groups.get(i).getName().equals(groupName)) {
+                    groupId = groups.get(i).getId();
+
+                }
+            }
+            groupSet.add(groupService.getGroup(groupId));
+
+            for (int i = 0; i<ids.size(); i++) {
+                Student theStudent = studentService.getStudent(ids.get(i));
+                theStudent.setGroups(groupSet);
+                studentService.addStudent(theStudent);
+            }
+
+        }
+
+        else if (addToTrainerGroup!=null)  {
+            Long groupId = null;
+            Set<Group> groupSet = new HashSet<>();
+            List<Group> groups = groupService.getAll();
+            for (int i = 0; i<groups.size(); i++) {
+                if (groups.get(i).getName().equals(trainerGroupName)) {
+                    groupId = groups.get(i).getId();
+
+                }
+            }
+            groupSet.add(groupService.getGroup(groupId));
+
+            for (int i = 0; i<ids.size(); i++) {
+                Student theStudent = studentService.getStudent(ids.get(i));
+                theStudent.setGroups(groupSet);
+                studentService.addStudent(theStudent);
+            }
+        }
 
 
-        if(deletee!=null){
+        else if(delete!=null){
             if (ids!=null)
 
                 for (int i =0; i < ids.size();i++) {
@@ -182,15 +283,7 @@ public class A_PersonsController {
             return "a_small_fitness/update_form/A_small_fitness_update_student";
         }
 
-        /*
-        Set<Group> groupSet = new HashSet<>();
-        List<Group> groups = groupService.getAll();
-        for(int i = 0; i < groups.size(); ++i) {
-            groupSet.add(groups.get(i));
-        }
-        theStudent.setGroups(groupSet);
-        */
-
+        theStudent.setUser(getCurrentUser());
         studentService.updateStudent(theStudent);
 
         return "redirect:/registerPerson/showFirstWorkPage";
@@ -208,6 +301,25 @@ public class A_PersonsController {
 
         return "a_small_fitness/update_form/A_small_fitness_update_student";
     }
+
+
+
+    @RequestMapping("/showMailForm")
+    public String showMailForm(Model theModel, @ModelAttribute("id") List<Long> ids){
+        //get our ids and get user name, and email
+        //add received emails to the arrauList
+        List<Student> students = new ArrayList<Student>();
+        for (int i = 0; i<ids.size(); i++) {
+            students.add(studentService.getStudent(ids.get(i)));
+            String email = students.get(i).getEmail();
+            studenEmail.add(email);
+        }
+        theModel.addAttribute("id", ids);
+        theModel.addAttribute("students", students);
+        return "A_send_mail_form";
+    }
+
+
     //create empty array list in order to fill it in the showMailForm method
     List<String> studenEmail = new ArrayList<String>();
 
@@ -246,24 +358,71 @@ public class A_PersonsController {
     //complex message method
     @RequestMapping("/showComplexMailForm")
     public String showComplexMailForm(Model model, @ModelAttribute("id") List<Long> ids) {
-        return "A_small_fitness_send_complex_mail_form";
-    }
 
-
-    @RequestMapping("/showMailForm")
-    public String showMailForm(Model theModel, @ModelAttribute("id") List<Long> ids){
-    //get our ids and get user name, and email
-        //add received emails to the arrauList
-        List<Student> students = new ArrayList<Student>();
-        for (int i = 0; i<ids.size(); i++) {
-            students.add(studentService.getStudent(ids.get(i)));
-            String email = students.get(i).getEmail();
-            studenEmail.add(email);
+        List<Integer> list = new ArrayList<>();
+        for(int i=1;i<30;i++){
+            list.add(i);
         }
-        theModel.addAttribute("id", ids);
-        theModel.addAttribute("students", students);
-        return "A_send_mail_form";
+        model.addAttribute("date" ,list);
+        return "send_complex_mail_form";
     }
+
+    @RequestMapping("/sendComplexMail")
+    public String sendComplexMail(HttpServletRequest request,
+                                  @RequestParam(value = "case", required = false) List <Integer> idN, Model model){
+        Date d = new Date();
+        SimpleDateFormat formatDay = new SimpleDateFormat("dd");
+        SimpleDateFormat formatDay2 = new SimpleDateFormat("hh:mm:");
+
+        int dayToday = Integer.parseInt(formatDay.format(d));
+        String timeToday =formatDay2.format(d);
+
+        System.out.println("time in hours = "+timeToday);
+
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        System.out.println(email);
+
+        //get the topic and body of the message
+        String body = request.getParameter("body");
+        String topic = request.getParameter("topic");
+
+        String resultMessage = "";
+
+        for(int k= 0;k<=idN.size();k++){
+            System.out.println(idN.size()+" size");
+            if(idN.get(k)==dayToday ){
+                System.out.println("numbet in if "+dayToday+" its day todat=="+idN.get(k));
+
+        for (Student s: studentService.getAll()) {
+            if(s.getEmail()!=null || !s.getEmail().equals("")) {
+                try {
+                    System.out.println(s.getEmail() + " send to");
+                    sendMailService.sendMailTo(s.getEmail(), topic, body, email, password);
+                    resultMessage = "The e-mail was sent successfully";
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                    resultMessage = "Error the e-mail was not sent successfully";
+                }
+
+
+                }
+
+            }
+
+          }//end of forEach Student s: studentService.getAll
+            model.addAttribute("message", resultMessage);
+            return "A_small_fitness_result_of_send_message";
+        }//end of idN.get(k)==dayToday
+     // return "A_small_fitness_first_work_Page";
+        return email;
+
+
+    }
+
+
+
 
  //   sorts students by age(after 16, befor 16 and select all student
     @RequestMapping("/sort")
@@ -382,4 +541,25 @@ public class A_PersonsController {
     }
 
 
+
+    //take registered user
+    public User getCurrentUser()  throws NotFoundException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (null == auth) {
+            System.out.println("error Vasia");;
+        }
+
+        Object obj = auth.getPrincipal();
+        String username = "";
+
+        if (obj instanceof UserDetails) {
+            username = ((UserDetails) obj).getUsername();
+        } else {
+            username = obj.toString();
+        }
+
+        User u = userService.getUserByUsername(username);
+        return u;
+    }
 }

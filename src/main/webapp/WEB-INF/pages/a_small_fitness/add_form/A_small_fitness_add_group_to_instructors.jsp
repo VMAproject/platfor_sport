@@ -50,22 +50,22 @@
             <tbody>
             <tr>
                 <td><label>Name:</label></td>
-                <td><form:input path="nameTraine" /></td>
+                <td><form:input path="name" /></td>
             </tr>
             <tr>
-            <select name="choose">
-                <option value="">выберите инструктора</option>
-                <c:forEach items="${categoryList}" var="category">
-                    <c:if test="${category.nameTraine!=null}">
-                    <option value="${category.nameTraine}">
-                        <c:out value="${category.nameTraine}"/>
-                    </option>
-                    </c:if>
-                </c:forEach>
-            </select>
-                </tr>
+                <select name="choose">
+                    <option value="">выберите инструктора</option>
+                    <c:forEach items="${categoryList}" var="category">
+                        <c:if test="${category.main!=true}">
+                            <option value="${category.name}">
+                                <c:out value="${category.name}"/>
+                            </option>
+                        </c:if>
+                    </c:forEach>
+                </select>
+            </tr>
             <tr>
-            <td><label></label></td>
+                <td><label></label></td>
                 <td><input type="submit" value="Save" class="save" /></td>
             </tr>
 
