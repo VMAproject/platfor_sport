@@ -1,5 +1,8 @@
 package com.sport.mvc.dao.impl.database;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
+
 import com.sport.mvc.models.Model;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -7,8 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.ParameterizedType;
-import java.util.List;
+import static org.hibernate.hql.internal.antlr.HqlTokenTypes.LIKE;
 
 public abstract class HibernateAbstractDao<T extends Model> {
 

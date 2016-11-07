@@ -27,6 +27,8 @@ public class HomeController {
     
     @Autowired
     HttpSession response;
+
+
 	
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -36,18 +38,16 @@ public class HomeController {
     	if (principal instanceof UserDetails) {
     		String username = ((UserDetails) principal).getUsername();
     		User user = userservice.getUserByUsername(username);
+    	    response.setAttribute("user", user);
+            log.info("Welcome to your cabinet!");
+			return "index";
+    	}else {
 
-			System.out.println("+++++++++++++++++++++"+user.getId());
-			response.setAttribute("user", user);
-			System.out.println(((UserDetails) principal).getPassword());
+			log.info("Welcome to your cabinet!");
+			return "index";
 		}
-		log.info("Welcome home! ");
-		return "index";
 	}
 
-	@RequestMapping(value = "/hello")
-	public String hello(){
-		return "hello";
-	}
+
 	
 }

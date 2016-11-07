@@ -28,8 +28,8 @@ public class Price extends Model{
     @OneToMany(mappedBy = "price", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CustomerCard> cards = new HashSet<>();
 
-//    @OneToMany(mappedBy = "price", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "price", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<User> users = new HashSet<>();
 
     public Price() {
         super();
@@ -83,9 +83,9 @@ public class Price extends Model{
         this.cards = cards;
     }
 
-//    public Set<User> getUsers() {
-//        return users;
-//    }
+    public Set<User> getUsers() {
+        return users;
+    }
 //
 //    public void setUsers(Set<User> users) {
 //        this.users = users;

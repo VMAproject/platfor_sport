@@ -1,7 +1,10 @@
 package com.sport.mvc.dao.impl.file;
 
 import com.sport.mvc.dao.UserDao;
+import com.sport.mvc.dao.impl.file.FileAbstractDao;
 import com.sport.mvc.models.User;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

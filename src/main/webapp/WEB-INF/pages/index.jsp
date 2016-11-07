@@ -40,11 +40,10 @@
             <li><a href="#">Главная</a></li>
             <%--<li><a href="/showChooseRegisterForm">Старт</a></li>--%>
             <li><a href="#">Контакты</a></li>
-            <li><a href="/login">Вход </a></li>
-
+            <li><a href="/login">Войти</a></li>
         </ul>
 
-        <%--<!-- LOGIN FORM -->--%>
+        <!-- LOGIN FORM -->
         <%--<form action="#" class="login">--%>
             <%--<input type="text" placeholder="Login" required>--%>
             <%--<input type="password" placeholder="Password" required >--%>

@@ -1,6 +1,7 @@
 package com.sport.mvc.dao.impl.file;
 
 import com.sport.mvc.dao.SessionHistoryDao;
+import com.sport.mvc.dao.impl.file.FileAbstractDao;
 import com.sport.mvc.models.SessionHistory;
 import org.springframework.stereotype.Repository;
 

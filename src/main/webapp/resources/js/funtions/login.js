@@ -29,7 +29,7 @@ $(document).ready(function($) {
 			data["city"]		=$("#city").val(),
 			data["country"]		=$("#country").val(),
 			data["district"]	=$("#district").val(),
-			data["birthday"] 	=$("#birthday").val(),
+			data["birthday"] =$("#birthday").val(),
 
 		url = "registration";
 		

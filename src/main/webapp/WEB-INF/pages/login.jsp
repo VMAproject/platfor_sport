@@ -4,7 +4,7 @@
 <html>
     <head>
         <title>Sign in Login</title>
-        <link href="<c:url value='/resources/css/login.css' />" rel="stylesheet"> </link>
+        <link href="<c:url value='/resources/css/login.css' />" rel="stylesheet"></link>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/funtions/login.js' />"></script>
     </head>
@@ -20,9 +20,9 @@
 				</span>
 		      </font>
 			  <form class="register-form" id="registerForm" action="#" method="post">
-			    <input type="text" placeholder="Login" id="username" autocomplete="off"/>
-			    <input type="password" placeholder="Password" id="password"/>
-			    <input type="email" placeholder="You Email" id="email" />
+			    <input type="text" placeholder="name" id="username" autocomplete="off"/>
+			    <input type="password" placeholder="password" id="password"/>
+			    <input type="email" placeholder="email address" id="email" autocomplete="off"/>
 
 
 				  <input type="text" placeholder="You Name" id="name"/>
@@ -37,8 +37,7 @@
 				<input type="hidden" id="csrfHeader" value="${_csrf.headerName}"/>
 			    <button>create</button>
 			    <p class="message">Already registered? <a href="#" onclick="toggle_visibility(); return false;" class="message">Sign In</a></p>
-
-			  </form>
+			    </form>
 			    <form class="login-form" action="<c:url value='/login' />" method="post">
 			      <input type="text" name="username" placeholder="username" autocomplete="off"/>
 			      <input type="password" name="password" placeholder="password"/>

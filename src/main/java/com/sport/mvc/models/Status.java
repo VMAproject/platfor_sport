@@ -1,6 +1,7 @@
 package com.sport.mvc.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 

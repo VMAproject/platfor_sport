@@ -2,6 +2,7 @@ package com.sport.mvc.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "list_date")

@@ -3,6 +3,7 @@ package com.sport.mvc.Controllers.smoll_fintess;
 import com.sport.mvc.models.Role;
 import com.sport.mvc.models.User;
 import com.sport.mvc.services.UserService;
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+//@RequestMapping("loginController")
 public class LoginController {
 	
 	@Autowired
@@ -32,9 +34,7 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
 	public Map<String, Object> registration(@RequestBody User user) {
-
 		Map<String, Object> response= new HashMap<String, Object>();
-
         Role role = new Role();
         role.setId(Long.valueOf(1));
 
@@ -43,19 +43,15 @@ public class LoginController {
 		user.setIsnonexpired("Y");
 		user.setIsnonlocked("Y");
 
-        System.out.println(user.getEmail()+" "+ user.getName()+ "-name "+user.getUsername()+"username");
-        System.out.println(userservice.addUser(user));
+
         Boolean save = userservice.addUser(user);
-        System.out.println(save +" true?");
-		System.out.println(user.getId());
-		if (save) {
+
+        if (save) {
 			response.put("suceess", true);
 	        response.put("message", "Registration Sucess");
 			return response;
 		}else {
-			System.out.println(" save?" +save);
-			System.out.println(user.getEmail()+" "+ user.getName()+ "-name "+user.getUsername()+"username"+"  ELSE!!!!");
-			response.put("error", true);
+            response.put("error", true);
 	        response.put("message", "Registration Failed");
 			return response;
 		}
@@ -67,7 +63,7 @@ public class LoginController {
         if (auth != null){    
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/index";
+		return "redirect:/index";
     }
 
 }
