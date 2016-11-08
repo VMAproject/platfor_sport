@@ -42,39 +42,39 @@ public class A_GroupController {
 
 
     //variable for taking the group id, when some group will by in use.
-    private  Long idGroup;
+    private Long idGroup;
 
     @RequestMapping(value = "/ShowGroupPage", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView showForm(){
+    public ModelAndView showForm() {
         ModelAndView modelAndView = new ModelAndView();
 
         //create list student,category of group and group for add data to the jsp page
         List<CategoryGroup> categoryGroupList = new ArrayList<>();
         List<Group> groupsList = new ArrayList<>();
-        List<Student> studentsListInGroup= new ArrayList<>();
+        List<Student> studentsListInGroup = new ArrayList<>();
 
-        for(Student s: studentService.getAll()) {
+        for (Student s : studentService.getAll()) {
 //check, if user has this student, add to student list
-            if (s.getUser().getId()!=null && s.getUser().getId() == getCurrentUser().getId() ) {
+            if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId()) {
 //check in which og group the students
-        if(s.getGroups().iterator().hasNext()&& s.getGroups().iterator().next().getId()==idGroup) {
+                if (s.getGroups().iterator().hasNext() && s.getGroups().iterator().next().getId() == idGroup) {
 
-            studentsListInGroup.add(s);
-        }
+                    studentsListInGroup.add(s);
+                }
             }
 
 
         }
 
-        for(Group g: groupService.getAll()){
-            if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
+        for (Group g : groupService.getAll()) {
+            if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
                 groupsList.add(g);
             }
         }
 
 
-        for(CategoryGroup g: categoryService.getAll()){
-            if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
+        for (CategoryGroup g : categoryService.getAll()) {
+            if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
                 categoryGroupList.add(g);
             }
         }
@@ -85,24 +85,21 @@ public class A_GroupController {
             modelAndView.addObject("students", studentsListInGroup);
         }
         // show group his group if group has more then 0 student
-        if(!groupsList.isEmpty()) {
+        if (!groupsList.isEmpty()) {
             modelAndView.addObject("groupsList", groupsList);
         }
 
         // show categoty in his group if group has more then 0 student
-        if(!categoryGroupList.isEmpty()) {
+        if (!categoryGroupList.isEmpty()) {
             modelAndView.addObject("categoryList", categoryGroupList);
         }
 
 
-
         //param for identifying locations is ->String chooseGroup
-        if(idGroup!=null && groupService.getGroup(idGroup).isMain()==true) {
+        if (idGroup != null && groupService.getGroup(idGroup).isMain() == true) {
             String chooseGroup = groupService.getGroup(idGroup).getName();
             modelAndView.addObject("chooseGroup", chooseGroup);
-        }
-
-        else {
+        } else {
             String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
             modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
         }
@@ -114,39 +111,36 @@ public class A_GroupController {
     }
 
 
-
-
-    @RequestMapping( value = "/AddGroupToInstructorsForm", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView  FormForAddInstructors() {
+    @RequestMapping(value = "/AddGroupToInstructorsForm", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView FormForAddInstructors() {
         // create model attribute to bind form data
         Group group = new Group();
         List<CategoryGroup> categoryGroupList = new ArrayList<>();
 
-        for(CategoryGroup g: categoryService.getAll()) {
+        for (CategoryGroup g : categoryService.getAll()) {
             if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
                 categoryGroupList.add(g);
             }
         }
         ModelAndView modelAndView = new ModelAndView();
-        if(!categoryGroupList.isEmpty()) {
+        if (!categoryGroupList.isEmpty()) {
             modelAndView.addObject("categoryList", categoryGroupList);
         }
         modelAndView.addObject("group", group);
         modelAndView.setViewName("a_small_fitness/add_form/A_small_fitness_add_group_to_instructors");
-        return  modelAndView;
+        return modelAndView;
     }
 
 
     @PostMapping("/saveGroupToTrainers")
-    public String saveGroupToTrainers(@ModelAttribute("group") Group group,@RequestParam("choose") String categoryName) {
+    public String saveGroupToTrainers(@ModelAttribute("group") Group group, @RequestParam("choose") String categoryName) {
         //add group to DB
         group.setUser(getCurrentUser());
-        if(categoryName.equals("")){
+        if (categoryName.equals("")) {
             groupService.addGroup(group);
-        }
-        else {
+        } else {
             for (CategoryGroup category : categoryService.getAll()) {
-                if(category.getName().equals(categoryName)){
+                if (category.getName().equals(categoryName)) {
                     group.setCategoryGroup(category);
                     groupService.addGroup(group);
                 }
@@ -157,45 +151,44 @@ public class A_GroupController {
         return "redirect:/group/AddGroupToInstructorsForm";
     }
 
-    @RequestMapping( value = "/showFormForAddGroup", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView  FormForAddGroup() {
+    @RequestMapping(value = "/showFormForAddGroup", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView FormForAddGroup() {
         // create model attribute to bind form data
         Group group = new Group();
         List<CategoryGroup> categoryGroupList = new ArrayList<>();
         List<String> stringList = new ArrayList<>();
-        for(CategoryGroup category: categoryGroupList){
+        for (CategoryGroup category : categoryGroupList) {
             stringList.add(category.getName());
         }
         ModelAndView modelAndView = new ModelAndView();
 
 
-        for(CategoryGroup g: categoryService.getAll()) {
+        for (CategoryGroup g : categoryService.getAll()) {
             if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
                 categoryGroupList.add(g);
             }
         }
 
-if (!categoryGroupList.isEmpty()) {
-    modelAndView.addObject("categoryList", categoryGroupList);
-}
+        if (!categoryGroupList.isEmpty()) {
+            modelAndView.addObject("categoryList", categoryGroupList);
+        }
         modelAndView.addObject("group", group);
         modelAndView.setViewName("a_small_fitness/add_form/A_small_fitness_add_group");
         //  return "A_small_fitness_add_group";
-        return  modelAndView;
+        return modelAndView;
     }
 
     @PostMapping("/saveGroup")
-    public String saveGroup(@ModelAttribute("group") Group group,@RequestParam("option") String categoryName) {
+    public String saveGroup(@ModelAttribute("group") Group group, @RequestParam("option") String categoryName) {
         //add group to DB
         group.setUser(getCurrentUser()); // add user to group&???
         group.setMain(true);
-        if(categoryName.equals("")){
+        if (categoryName.equals("")) {
 
             groupService.addGroup(group);
-        }
-        else {
+        } else {
             for (CategoryGroup category : categoryService.getAll()) {
-                if(category.getName().equals(categoryName)){
+                if (category.getName().equals(categoryName)) {
                     group.setCategoryGroup(category);
 
                     groupService.addGroup(group);
@@ -241,23 +234,23 @@ if (!categoryGroupList.isEmpty()) {
         return "redirect:/group/showFormForAddCategoryTrainers";
     }
 
-    @RequestMapping( value = "/showFormForDelete", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView  FormForDeleteGroups() {
+    @RequestMapping(value = "/showFormForDelete", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView FormForDeleteGroups() {
         // create model attribute to bind form data
         Group group = new Group();
         List<Group> groupList = groupService.getAll();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("groupList" ,groupList);
+        modelAndView.addObject("groupList", groupList);
         modelAndView.addObject("group", group);
         modelAndView.setViewName("a_small_fitness/delete_form/A_small_fitness_delete_groups");
         //  return "A_small_fitness_add_group";
-        return  modelAndView;
+        return modelAndView;
     }
 
     @PostMapping("/deleteGroup")
-    public String deleteGroup( @RequestParam(value = "case", required = false) List <Long> ids) {
+    public String deleteGroup(@RequestParam(value = "case", required = false) List<Long> ids) {
 
-        for(int i =0; i<ids.size();i++){
+        for (int i = 0; i < ids.size(); i++) {
             groupService.deleteListOfGroup(ids.get(i));
 
         }
@@ -265,30 +258,26 @@ if (!categoryGroupList.isEmpty()) {
     }
 
 
-
-
-    @RequestMapping( value = "/showFormForUpdate", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView  FormForUpdateGroups() {
+    @RequestMapping(value = "/showFormForUpdate", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView FormForUpdateGroups() {
         // create model attribute to bind form data
         Group group = new Group();
         List<Group> groupList = groupService.getAll();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("groupList" ,groupList);
+        modelAndView.addObject("groupList", groupList);
         modelAndView.addObject("group", group);
         modelAndView.setViewName("a_small_fitness/update_form/A_small_fitness_update_groups");
         //  return "A_small_fitness_add_group";
-        return  modelAndView;
+        return modelAndView;
     }
 
 
-
-
     @PostMapping("/updateGroup")
-    public String updateGroup(@ModelAttribute("group") Group group,@RequestParam("option") Long theId) {
+    public String updateGroup(@ModelAttribute("group") Group group, @RequestParam("option") Long theId) {
         //add group to DB
         System.out.println(group.getName());
-        for(Group g: groupService.getAll()){
-            if(g.getId()==theId&& groupService.getGroup(theId).getName()!=null){
+        for (Group g : groupService.getAll()) {
+            if (g.getId() == theId && groupService.getGroup(theId).getName() != null) {
                 g.setName(group.getName());
                 groupService.addGroup(g);
                 continue;
@@ -303,33 +292,31 @@ if (!categoryGroupList.isEmpty()) {
     }
 
 
-    @RequestMapping( value = "/showFormForUpdateCategory", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView  FormForUpdateTrainersGroups() {
+    @RequestMapping(value = "/showFormForUpdateCategory", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView FormForUpdateTrainersGroups() {
         // create model attribute to bind form data
         CategoryGroup category = new CategoryGroup();
 
         List<CategoryGroup> categoryGroupList = categoryService.getAll();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("categoryList" ,categoryGroupList);
+        modelAndView.addObject("categoryList", categoryGroupList);
         modelAndView.addObject("category", category);
         modelAndView.setViewName("a_small_fitness/update_form/A_small_fitness_update_category");
         //  return "A_small_fitness_add_group";
-        return  modelAndView;
+        return modelAndView;
     }
 
 
-
-
     @PostMapping("/updateCategory")
-    public String updateTrainersGroup(@ModelAttribute("category") CategoryGroup category,@RequestParam("option") Long theId) {
+    public String updateTrainersGroup(@ModelAttribute("category") CategoryGroup category, @RequestParam("option") Long theId) {
         //add group to DB
 
-        for(CategoryGroup c: categoryService.getAll()){
+        for (CategoryGroup c : categoryService.getAll()) {
 //            if(c.getId()==theId && categoryService.getCategoryGroup(theId).getNameTraine()!=null) {
 //                c.setNameTraine(category.getName());
 //                categoryService.addCategoryGroup(c);
 //            }
-            if(c.getId()==theId && categoryService.getCategoryGroup(theId).getName()!=null) {
+            if (c.getId() == theId && categoryService.getCategoryGroup(theId).getName() != null) {
                 c.setName(category.getName());
                 categoryService.addCategoryGroup(c);
             }
@@ -338,14 +325,13 @@ if (!categoryGroupList.isEmpty()) {
     }
 
 
-
     @RequestMapping("/deleteGroup")
-    public  void deleteGrout(){
+    public void deleteGrout() {
         //  groupService.deleteListOfGroup();
     }
 
     @RequestMapping("/addStudentToGroupForm")
-    public  String addStudentToGroup(Model theModel){
+    public String addStudentToGroup(Model theModel) {
         //create new student for add form
         Student theStudent = new Student();
         //transfer student to "A_add_to_group_Student" form
@@ -354,12 +340,11 @@ if (!categoryGroupList.isEmpty()) {
     }
 
 
-
     @RequestMapping("saveStudentToGroup")
-    public  String saveStudentToGroup(@ModelAttribute("student") Student theStudent){
+    public String saveStudentToGroup(@ModelAttribute("student") Student theStudent) {
 
         Set<Group> groupSet = new HashSet<>();
-       // Group group =groupService.getGroup(idGroup);
+        // Group group =groupService.getGroup(idGroup);
 //        group.setUser(getCurrentUser());
         groupSet.add(groupService.getGroup(idGroup));
         theStudent.setUser(getCurrentUser());
@@ -370,7 +355,7 @@ if (!categoryGroupList.isEmpty()) {
     }
 
     @RequestMapping("/takeIdGroup")
-    public String TakeIdGroup(@RequestParam("groupId") long theId ) {
+    public String TakeIdGroup(@RequestParam("groupId") long theId) {
         //take id group, where we now, and write it in to global variable->idGroup
         idGroup = theId;
         //return to showGroup page for fow all data on the  page
@@ -398,26 +383,27 @@ if (!categoryGroupList.isEmpty()) {
     }
 
     @RequestMapping("addPriceSubscription")
-    private String addSubscriptionForm(Model theModel){
+    private String addSubscriptionForm(Model theModel) {
         CustomerCard card = new CustomerCard();
         theModel.addAttribute("subscription", card);
         return "A_add_subscription_form";
     }
 
     @PostMapping("savePriceSubscription")
-    private String savePriceSubscriptionForm(@ModelAttribute("subscription") CustomerCard card){
-        Group inGroup= groupService.getGroup(idGroup);
+    private String savePriceSubscriptionForm(@ModelAttribute("subscription") CustomerCard card) {
+        Group inGroup = groupService.getGroup(idGroup);
 
 
         return "A_add_subscription_form";
     }
 
     //take registered user
-    public User getCurrentUser()  throws NotFoundException {
+    public User getCurrentUser() throws NotFoundException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (null == auth) {
-            System.out.println("error Vasia");;
+            System.out.println("error Vasia");
+            ;
         }
 
         Object obj = auth.getPrincipal();
@@ -432,5 +418,26 @@ if (!categoryGroupList.isEmpty()) {
         User u = userService.getUserByUsername(username);
         return u;
     }
+
+
+    @RequestMapping("/delete")
+    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String deletee,
+                                    @RequestParam(value = "case", required = false) List<Long> ids) {
+
+
+        if (deletee != null) {
+            if (ids != null)
+
+                for (int i = 0; i < ids.size(); i++) {
+                    Student theStudent = studentService.getStudent(ids.get(i));
+                    theStudent.setGroups(null);
+                    studentService.addStudent(theStudent);
+                }
+
+        }
+            return "redirect:/registerPerson/showGroupPage";
+        }
+
+
 
 }

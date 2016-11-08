@@ -254,7 +254,7 @@
                 <input type="button" value="Добавить"
                        onclick="window.location.href='addStudentToGroupForm'; return false;" class="add-button"
                 />
-                <input type="submit" name="deletee" value="удалить">
+                <input type="submit" name="delete" value="удалить">
                 <input type="submit" name="send_email" value="send email" class="add-button"
                 />
                 <input type="button" value="Отправить смс">
