@@ -1,6 +1,7 @@
 package com.sport.mvc.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +36,7 @@ public class User extends Model {
 
 
 
-//    @Pattern(regexp = "^[A-Za-z0-9]{3,}$")
+    @Pattern(regexp = "^[A-Za-z0-9]{3,}$",message = "ввели не коректные данные!")
     @Column(name = "username")
     private String username;
 
