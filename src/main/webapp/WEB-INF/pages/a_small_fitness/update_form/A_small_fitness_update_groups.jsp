@@ -49,12 +49,13 @@
         <table>
             <tbody>
             <tr>
-                <td><label>Введите новое имя:</label></td>
+                <td><label>Введите новое название группы:</label></td>
                 <td><form:input path="name" /></td>
             </tr>
 
             <tr>
             <select name="option">
+                <option value="">выберите группу</option>
                 <%--<option value="">выберите группу</option>--%>
                 <c:forEach items="${groupList}" var="groups">
                     <%--<c:if test="${groups.name!=null}">--%>
@@ -64,11 +65,11 @@
                     <%--</c:if>--%>
                     <option value="${groups.id}">
                     <c:choose>
-                        <c:when test="${groups.name!=null}">
+                        <c:when test="${groups.main==true}">
                             <c:out value="${groups.name}"/>
                         </c:when>
-                        <c:when test="${groups.nameTraine!=null}">
-                            <c:out value="${groups.nameTraine}"/>
+                        <c:when test="${groups.main!=true}">
+                            <c:out value="${groups.name}"/>
                         </c:when>
                     </c:choose>
                     </option>

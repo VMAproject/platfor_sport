@@ -42,20 +42,20 @@
 
 
 <div class="container addgroup_form">
-    <h1>Update category ar trainers of group</h1>
+    <h1>Update category at trainers of group</h1>
     <br>
     <form:form action="updateCategory" modelAttribute="category" method="POST">
         <form:hidden path="id" />
         <table>
             <tbody>
             <tr>
-                <td><label>Введите новое имя:</label></td>
+                <td><label>Введите новое название категории:</label></td>
                 <td><form:input path="name" /></td>
             </tr>
 
             <tr>
             <select name="option">
-                <option value="">выберите группу</option>
+                <option value="">выберите категорию</option>
                 <c:forEach items="${categoryList}" var="category">
                     <%--<c:if test="${category.nameTraine!=null}">--%>
                     <%--<option value="${groups.id}">--%>
@@ -64,11 +64,11 @@
                     <%--</c:if>--%>
                     <option value="${category.id}">
                     <c:choose>
-                        <c:when test="${category.name!=null}">
+                        <c:when test="${category.main==true}">
                             <c:out value="${category.name}"/>
                         </c:when>
-                        <c:when test="${category.nameTraine!=null}">
-                            <c:out value="${category.nameTraine}"/>
+                        <c:when test="${category.main!=true}">
+                            <c:out value="${category.name}"/>
                         </c:when>
                     </c:choose>
                     </option>

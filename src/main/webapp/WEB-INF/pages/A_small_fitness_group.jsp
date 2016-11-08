@@ -56,7 +56,7 @@
                 <li><a href="#">controls</a>
                     <ul>
                         <li><a href="/group//showFormForUpdate">Update</a></li>
-                        <li><a href="#">Delete</a></li>
+                        <li><a href="/group//showFormForDelete">Delete</a></li>
                         <li><a href="/group//showFormForAddGroup">new group</a></li>
                     </ul>
                 </li>
@@ -117,7 +117,7 @@
                 <li><a href="#">controls</a>
                     <ul>
                         <li><a href="/group//showFormForUpdate">Update</a></li>
-                        <li><a href="#">Delete</a></li>
+                        <li><a href="/group//showFormForDelete">Delete</a></li>
                         <li><a href="/group//AddGroupToInstructorsForm">new group</a></li>
                     </ul>
                 </li>
@@ -254,7 +254,7 @@
                 <input type="button" value="Добавить"
                        onclick="window.location.href='addStudentToGroupForm'; return false;" class="add-button"
                 />
-                <input type="submit" name="deletee" value="удалить">
+                <input type="submit" name="delete" value="удалить">
                 <input type="submit" name="send_email" value="send email" class="add-button"
                 />
                 <input type="button" value="Отправить смс">
