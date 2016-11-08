@@ -158,6 +158,7 @@ public class A_PersonsController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
         theStudent.setRecordDay(dateFormat.format(today));
+
         theStudent.setUser(getCurrentUser());
 
         if(result.hasErrors()) {
@@ -202,7 +203,7 @@ public class A_PersonsController {
 //    }
 
 
-    @RequestMapping(value = "/act", method = RequestMethod.POST)
+    @RequestMapping(value = "/act")
     public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String delete,
                                     @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
                                     @RequestParam(value = "case", required = false) List <Long> ids,
@@ -214,6 +215,7 @@ public class A_PersonsController {
                                     RedirectAttributes ra) {
         if (addToGroup!=null) {
             Long groupId = null;
+            System.out.println("in add to group");
             Set<Group> groupSet = new HashSet<>();
             List<Group> groups = groupService.getAll();
             for (int i = 0; i<groups.size(); i++) {
@@ -256,7 +258,16 @@ public class A_PersonsController {
             if (ids!=null)
 
                 for (int i =0; i < ids.size();i++) {
-                    System.out.println("in method A_controller del " + ids );
+
+                    Student theStudent =studentService.getStudent(ids.get(i));
+                    if(theStudent.getGroups()!=null){
+                        theStudent.setGroups(null);
+                    }
+                    if(theStudent.getGroups()!=null && theStudent.getGroups().iterator().next().getCategoryGroup()!=null){
+                        theStudent.getGroups().iterator().next().setCategoryGroup(null);
+                    }
+                    theStudent.setUser(null);
+                    studentService.addStudent(theStudent);
                     studentService.deleteListOfStudents(ids.get(i));
                 }
         }

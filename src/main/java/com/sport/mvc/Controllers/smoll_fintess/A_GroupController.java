@@ -120,9 +120,17 @@ public class A_GroupController {
     public ModelAndView  FormForAddInstructors() {
         // create model attribute to bind form data
         Group group = new Group();
-        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        List<CategoryGroup> categoryGroupList = new ArrayList<>();
+
+        for(CategoryGroup g: categoryService.getAll()) {
+            if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
+                categoryGroupList.add(g);
+            }
+        }
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("categoryList" ,categoryGroupList);
+        if(!categoryGroupList.isEmpty()) {
+            modelAndView.addObject("categoryList", categoryGroupList);
+        }
         modelAndView.addObject("group", group);
         modelAndView.setViewName("a_small_fitness/add_form/A_small_fitness_add_group_to_instructors");
         return  modelAndView;
@@ -153,13 +161,23 @@ public class A_GroupController {
     public ModelAndView  FormForAddGroup() {
         // create model attribute to bind form data
         Group group = new Group();
-        List<CategoryGroup> categoryGroupList = categoryService.getAll();
+        List<CategoryGroup> categoryGroupList = new ArrayList<>();
         List<String> stringList = new ArrayList<>();
         for(CategoryGroup category: categoryGroupList){
             stringList.add(category.getName());
         }
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("categoryList" ,categoryGroupList);
+
+
+        for(CategoryGroup g: categoryService.getAll()) {
+            if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
+                categoryGroupList.add(g);
+            }
+        }
+
+if (!categoryGroupList.isEmpty()) {
+    modelAndView.addObject("categoryList", categoryGroupList);
+}
         modelAndView.addObject("group", group);
         modelAndView.setViewName("a_small_fitness/add_form/A_small_fitness_add_group");
         //  return "A_small_fitness_add_group";
