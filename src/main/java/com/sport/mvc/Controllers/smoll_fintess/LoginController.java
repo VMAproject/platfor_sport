@@ -3,7 +3,6 @@ package com.sport.mvc.Controllers.smoll_fintess;
 import com.sport.mvc.models.Role;
 import com.sport.mvc.models.User;
 import com.sport.mvc.services.UserService;
-import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,17 +37,22 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
 	public Map<String, Object> registration(@RequestBody User user) {
+
 		Map<String, Object> response= new HashMap<String, Object>();
         Role role = new Role();
-        role.setId(Long.valueOf(1));
+        role.setId(1L);
 
 		user.setRole(role);
 		user.setIsactive("Y");
 		user.setIsnonexpired("Y");
 		user.setIsnonlocked("Y");
 
+
+
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
+
+
 
         Boolean save = userservice.addUser(user);
 

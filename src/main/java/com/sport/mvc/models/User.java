@@ -1,13 +1,9 @@
 package com.sport.mvc.models;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -15,24 +11,35 @@ public class User extends Model {
 
     private static final long serialVersionUID = -8950386400041310256L;
 
+//    @Size(min = 3,max = 30)
+//    @Pattern(regexp = "^[А-Яа-яЁё\\s]+$", message = "patern.name.registration")
     @Column(name = "name")
     private String name;
 
+//    @Size(min = 3,max = 30)
+//    @Pattern(regexp = "^[А-Яа-яЁё\\s]+$", message = "patern.name.registration")
     @Column(name = "surname")
     private String surname;
 
+//    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",message = "patern.email.registration")
     @Column(name = "email")
     private String email;
 
+//    @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name = "birthday")
     private Date birthday;
 
+//    @Pattern(regexp = "^\\+?38\\(?0\\d{2}\\)?\\d{3}-?\\d{2}-?\\d{2}$",message = "patern.phone.registration")
     @Column(name = "phone")
     private String phone;
 
+
+
+//    @Pattern(regexp = "^[A-Za-z0-9]{3,}$")
     @Column(name = "username")
     private String username;
 
+//    @Pattern(regexp = "^[A-Za-z0-9]{3,}$")
     @Column(name = "password")
     private String password;
 
@@ -45,6 +52,15 @@ public class User extends Model {
     @Column(name = "district")
     private String district;
 
+    @Column(name = "isactive")
+    private String isactive;
+
+    @Column(name = "isnonexpired")
+    private String isnonexpired;
+
+    @Column(name = "isnonlocked")
+    private String isnonlocked;
+
 //    @ManyToOne(fetch = FetchType.LAZY, optional = true)
 //    @JoinColumn(name = "session_history_id")
 //    private SessionHistory sessionHistory;
@@ -54,17 +70,11 @@ public class User extends Model {
     private Role role;
 
 
-
-
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Group> groups = new HashSet<>();
 
-
-
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Student> students = new HashSet<>();
-
-
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         @JoinTable(name = "user_sport", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
@@ -82,16 +92,6 @@ public class User extends Model {
     public void setPrice(Price price) {
         this.price = price;
     }
-
-
-    @Column(name = "isactive")
-    private String isactive;
-
-    @Column(name = "isnonexpired")
-    private String isnonexpired;
-
-    @Column(name = "isnonlocked")
-    private String isnonlocked;
 
 
     public User() {
