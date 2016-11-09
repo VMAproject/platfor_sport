@@ -58,7 +58,7 @@ public class Student extends Model {
     @Column(name = "age")
     private String age;
 
-    @Pattern(regexp = "[0-9]{10,10}+", message="{Pattern.student.phone}")
+   // @Pattern(regexp = "[0-9]{10,10}+", message="{Pattern.student.phone}")
     @Column(name = "phone")
     private String phone;
 

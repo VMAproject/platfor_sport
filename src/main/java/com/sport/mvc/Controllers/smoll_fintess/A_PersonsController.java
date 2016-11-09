@@ -12,6 +12,7 @@ import com.sport.mvc.socialAdvertisement.SendMailService;
 import com.sport.mvc.models.Student;
 import com.sport.mvc.services.StudentService;
 
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -152,15 +153,20 @@ public class A_PersonsController {
 
 
     @PostMapping("/saveStudent")
-    public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+    public String saveCustomer(@ModelAttribute("student") @Valid Student theStudent, BindingResult result, Model model) {
         // add date(when user do this record
         Date today = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
         theStudent.setRecordDay(dateFormat.format(today));
 
         theStudent.setUser(getCurrentUser());
 
+        if (theStudent.getName().equals("") && theStudent.getPhone().equals("") && theStudent.getEmail().equals("")
+                 && theStudent.getComments().equals("") && theStudent.getSurname().equals("")&&theStudent.getBirthday()==null
+                &&theStudent.getAge().equals("")) {
+            model.addAttribute("nullFields", "Add at least one field");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
         if(result.hasErrors()) {
             return "a_small_fitness/add_form/A_small_fitness_add_student";
         }
@@ -257,7 +263,13 @@ public class A_PersonsController {
     }
 
     @PostMapping("/saveStudentAfterUpdate")
-    public String saveCustomerAfterUpdate(@ModelAttribute("student") @Valid Student theStudent, BindingResult result) {
+    public String saveCustomerAfterUpdate(@ModelAttribute("student") @Valid Student theStudent, BindingResult result, Model model) {
+        if (theStudent.getName().equals("") && theStudent.getPhone().equals("") && theStudent.getEmail().equals("")
+                && theStudent.getComments().equals("") && theStudent.getSurname().equals("")&&theStudent.getBirthday()==null
+                &&theStudent.getAge().equals("")) {
+            model.addAttribute("nullFields", "Add at least one field");
+            return "a_small_fitness/update_form/A_small_fitness_update_student";
+        }
         if(result.hasErrors()) {
             return "a_small_fitness/update_form/A_small_fitness_update_student";
         }
@@ -275,6 +287,7 @@ public class A_PersonsController {
         System.out.println(theId);
         // get customer from database
         Student theStudent = studentService.getStudent(theId);
+        theStudent.setRecordDay(theStudent.getRecordDay());
         // set customer as model attribute to pre-populate the form
         theModel.addAttribute("student", theStudent);
 
@@ -438,10 +451,12 @@ public class A_PersonsController {
             } else if (option.equals("getUnknownStudent")) {
                 for (Student s : studentService.getAll()) {
                     if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId()) {
-
-                        if (!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("") ||
-                                !(s.getName() == null) || !(s.getSurname() == null) || !(s.getEmail() == null)) {
-                            continue;
+                        System.out.println(s.getName()+" ---name");
+                        System.out.println(s.getSurname()+"---familia");
+                        System.out.println(s.getEmail()+"===mail");
+                        if (!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("")) {
+                            //||!(s.getName() == null) || !(s.getSurname() == null) || !(s.getEmail() == null)
+                           continue;
                         }
                         students.add(s);
                     }
