@@ -1,11 +1,8 @@
 package com.sport.mvc.dao.impl.database;
 
 import com.sport.mvc.dao.UserDao;
-
 import com.sport.mvc.models.User;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 
 import java.util.List;
 
@@ -19,8 +16,8 @@ public class UserDatabaseDao extends HibernateAbstractDao<User> implements UserD
     @Override
     public boolean addUser(User user) {
         try {
+            getSession().save(user);
 
-        getSession().save(user);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
