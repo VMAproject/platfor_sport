@@ -55,19 +55,22 @@
             <tbody>
             <tr>
                 <td><label>Имя:</label></td>
-                <td><form:input path="name" />
+                <td ><form:input path="name" />
                     <form:errors path="name" class="alert alert-danger"></form:errors>
                 </td>
+                <td>${moreChar}</td>
             </tr>
             <br>
             <tr>
                 <td><label>Фамилия:</label></td>
                 <td><form:input path="surname" /></td>
+                <td>${moreCharSereName}</td>
             </tr>
             <br>
             <tr>
-                <td><label>Телефон в формате (0xxxxxxxxx):</label></td>
+                <td ><label>Телефон:</label></td>
                 <td><form:input path="phone" /><form:errors path="phone"  class="alert alert-danger"></form:errors></td>
+                <td>${moreNumber}</td>
             </tr>
             <br>
             <tr>
@@ -83,6 +86,7 @@
             <tr>
                 <td><label>Возвраст:</label></td>
                 <td><form:input path="age" /></td>
+                <td>${ageException}</td>
             </tr>
             <tr>
                 <td><label>Post:</label></td>

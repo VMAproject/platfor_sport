@@ -31,7 +31,7 @@
 
         <!-- LOGIN FORM -->
         <form action="#" class="login">
-            <input type="text" placeholder="Login" required>
+            <input type="text" placeholder="Login" required >
             <input type="password" placeholder="Password" required>
             <input type="submit" value="Sign In">
         </form>

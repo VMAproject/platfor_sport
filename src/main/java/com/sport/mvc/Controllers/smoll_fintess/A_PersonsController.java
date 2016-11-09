@@ -124,7 +124,7 @@ public class A_PersonsController {
       modelAndView.addObject("categoryList", categoryGroupList);
   }
 
-
+        modelAndView.addObject("currentUser", getCurrentUser());
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
 
@@ -160,6 +160,37 @@ public class A_PersonsController {
         theStudent.setRecordDay(dateFormat.format(today));
 
         theStudent.setUser(getCurrentUser());
+        if(!theStudent.getName().equals("") && theStudent.getName().length()>=1 && theStudent.getName().length()<=3){
+            model.addAttribute("moreChar", "name must have more then 3 letter");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+
+        if(!theStudent.getSurname().equals("") && theStudent.getSurname().length()>=1 && theStudent.getSurname().length()<=3){
+            model.addAttribute("moreCharSereName", "sere name must have more then 3 letter");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+        if(!theStudent.getName().equals("") && theStudent.getName().length()>=1 && theStudent.getName().length()<=3){
+            model.addAttribute("moreChar", "name must have more then 3 letter");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+
+        if(!theStudent.getPhone().equals("") && theStudent.getPhone().length()<10){
+            model.addAttribute("moreNumber", "number must have 10 numbers, like 0987654534");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+//        if(!theStudent.getBirthday().equals("") ){
+//            model.addAttribute("moreNumber", "number must have 10 numbers, like 0987654534");
+//            return "a_small_fitness/add_form/A_small_fitness_add_student";
+//        }
+        if(!theStudent.getAge().equals("") && theStudent.getAge().equals("0")){
+            model.addAttribute("ageException", "Age must be more then 0 ");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
+
+        if(!theStudent.getPhone().equals("") && theStudent.getPhone().length()<10){
+            model.addAttribute("moreNumber", "number must have 10 numbers, like 0987654534");
+            return "a_small_fitness/add_form/A_small_fitness_add_student";
+        }
 
         if (theStudent.getName().equals("") && theStudent.getPhone().equals("") && theStudent.getEmail().equals("")
                  && theStudent.getComments().equals("") && theStudent.getSurname().equals("")&&theStudent.getBirthday()==null
@@ -284,7 +315,7 @@ public class A_PersonsController {
     public String showFormForUpdate(@RequestParam("studentId") long theId, Model theModel) {
 
         //   logger.info("showing form for update");
-        System.out.println(theId);
+
         // get customer from database
         Student theStudent = studentService.getStudent(theId);
         theStudent.setRecordDay(theStudent.getRecordDay());
@@ -419,8 +450,6 @@ public class A_PersonsController {
  //   sorts students by age(after 16, befor 16 and select all student
     @RequestMapping("/sort")
     public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
-      //  List<Student> students =new ArrayList<>();
-        //new modelAndView for return to jsp listStudent with the selected parameters
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = new ArrayList<>();
 
@@ -482,10 +511,6 @@ public class A_PersonsController {
     @RequestMapping(value = "/find")
     public ModelAndView findStudent(@RequestParam(value = "data", required = false) String data,
                                     @RequestParam(value = "option", required = false) String option){
-
-        System.out.println("in method find");
-        System.out.println(data+ " the data");
-        System.out.println(option+ "option");
 
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();

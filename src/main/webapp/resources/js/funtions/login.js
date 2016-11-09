@@ -14,7 +14,7 @@ function toggle_visibility() {
  * registration function with jquery ajax 
  */
 $(document).ready(function($) {
-	$("#js-registerForm").submit(function(event) {
+	$("#registerForm").submit(function(event) {
 		
 		event.preventDefault();
 		var data = {}

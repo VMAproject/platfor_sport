@@ -35,6 +35,11 @@ public class Group extends Model {
     @JoinColumn(name = "category_id")
     private CategoryGroup categoryGroup;
 
+
+
+    @OneToOne(mappedBy = "groups", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Price prices ;
+
     public Group() {
         super();
     }
@@ -88,4 +93,12 @@ public class Group extends Model {
     }
 
 
+
+    public Price getPrices() {
+        return prices;
+    }
+
+    public void setPrices(Price prices) {
+        this.prices = prices;
+    }
 }

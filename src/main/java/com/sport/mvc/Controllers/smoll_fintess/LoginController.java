@@ -37,22 +37,17 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
 	public Map<String, Object> registration(@RequestBody User user) {
-
-		Map<String, Object> response = new HashMap<String, Object>();
+		Map<String, Object> response= new HashMap<String, Object>();
         Role role = new Role();
-        role.setId(1L);
+        role.setId(Long.valueOf(1));
 
 		user.setRole(role);
 		user.setIsactive("Y");
 		user.setIsnonexpired("Y");
 		user.setIsnonlocked("Y");
 
-
-
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
-
-
 
         Boolean save = userservice.addUser(user);
 

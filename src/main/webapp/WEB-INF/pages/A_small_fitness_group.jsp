@@ -92,6 +92,7 @@
                         </c:forEach>
                     </ul>
                 </li>
+                <li><a href="/group//showFormAddOrChangePriceAbonement">Abonement Price</a></li>
                 <%--// Empty li--%>
                 <li><a href="#">.....</a></li>
                 <%--//show new creating groups--%>
@@ -176,18 +177,10 @@
         <li><a href="#">Finance</a></li>
 
         <li>
-            <c:set value="${chooseTrainerGroup}" var="groupTrainer"/>
-
-            <c:choose>
-                <c:when test="${groupTrainer}!=null">
-                    <h4>You in ${groupTrainer} group </h4>
-                </c:when>
-                <c:otherwise >
-                    <h4>You in ${groupTrainer} group</h4>
-                </c:otherwise>
-            </c:choose>
+            <c:set value="${chooseGroup}" var="group"/>
+            <a href="#">You in ${group.name} group</a>
         </li>
-
+         <li><a href="#">${currentUser.username}  ${currentUser.email}</a></li>
         <li id="out"><a href='<c:url value="/logout"></c:url>' class="btn btn-default btn-flat">Sign OUT</a></li>
     </ul>
 
@@ -197,14 +190,15 @@
 
 <div>
     <c:set value="${chooseTrainerGroup}" var="groupTrainer"/>
+    <c:set value="${chooseGroup}" var="group"/>
 
     <c:choose>
         <c:when test="${groupTrainer}!=null">
             <h4>You in ${groupTrainer} group </h4>
         </c:when>
-        <c:otherwise >
-            <h4>You in ${groupTrainer} group</h4>
-        </c:otherwise>
+        <c:when test="${groupTrainer}==null">
+            <h4>You in ${group} group </h4>
+        </c:when>
     </c:choose>
 
 </div>
@@ -212,7 +206,7 @@
 <!-- MAIN SECTION -->
 <main>
 
-    <a href="/group/addPriceSubscription">abonement price</a>
+
 
     <div class="work_form">
 
@@ -278,6 +272,7 @@
         <th>Статус оплаты</th>
         <th>Блок<input type="radio"></th>
         <th><input type="checkbox" id="selectall"></th>
+       <th>Редактировать поле</th>
         </thead>
         <tbody>
 
@@ -287,7 +282,28 @@
                 <td align="left">${student.surname}</td>
                 <td>${student.phone}</td>
                 <td>${student.email}</td>
-                <td></td>
+
+                <td>
+
+                    <select name="selectedPrice">
+                        <option value="0">abonement price</option>
+                        <c:forEach items="${priceList}" var="prices">
+                            <%--<c:choose>--%>
+                            <c:if test="${prices.priceMonth!=0}">
+                            <option value="prices"><c:out value="${prices.priceMonth}"/></option>
+                            </c:if>
+                                <c:if test="${prices.priceMonth!=0}">
+                                    <option value="prices"><c:out value="${prices.priceMonthHalf}"/></option>
+                                </c:if>
+                                <c:if test="${prices.priceMonth!=0}">
+                                    <option value="prices"><c:out value="${prices.priceSingle}"/></option>
+                                </c:if>
+                        <%--</c:choose>--%>
+                        </c:forEach>
+                    </select>
+
+                </td>
+
                 <td></td>
                 <td>
                     <select name="selectedStartDate">
@@ -319,7 +335,6 @@
                 </td>
                 <td > <input type="radio"></td>
                 <td><input type="checkbox" class="case", name="case" value="${student.id}"></td>
-                <td align="left"></td>
                 <td>
                     <!-- construct an "update" link with customer id -->
                     <c:url var="updateLink" value="/registerPerson/showFormForUpdate" >

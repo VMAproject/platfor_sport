@@ -2,10 +2,7 @@ package com.sport.mvc.Controllers.smoll_fintess;
 
 
 import com.sport.mvc.models.*;
-import com.sport.mvc.services.CategoryGroupService;
-import com.sport.mvc.services.GroupService;
-import com.sport.mvc.services.StudentService;
-import com.sport.mvc.services.UserService;
+import com.sport.mvc.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.acls.model.NotFoundException;
@@ -17,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.xml.ws.RequestWrapper;
 import java.util.*;
 
 
@@ -27,6 +25,10 @@ public class A_GroupController {
     @Autowired
     @Qualifier("groupService")
     private GroupService groupService;
+
+    @Autowired
+    @Qualifier("priceService")
+    private PriceService priceService;
 
     @Autowired
     @Qualifier("userService")
@@ -94,19 +96,28 @@ public class A_GroupController {
             modelAndView.addObject("categoryList", categoryGroupList);
         }
 
-
-        //param for identifying locations is ->String chooseGroup
-        if (idGroup != null && groupService.getGroup(idGroup).isMain() == true) {
-            String chooseGroup = groupService.getGroup(idGroup).getName();
+        Group chooseGroup = groupService.getGroup(idGroup);
             modelAndView.addObject("chooseGroup", chooseGroup);
+            System.out.println(chooseGroup.getName());
+
+        List<Price> priceList = new ArrayList<Price>();
+        for(Price p: priceService.getAll() ){
+            if( p.getUser().getId()!=null && p.getUser().getId()==getCurrentUser().getId() &&
+                    p.getGroups().getId()!=null && p.getGroups().getId()==idGroup ){
+                priceList.add(p);
+
+            }
         }
-        if(idGroup != null && groupService.getGroup(idGroup).isMain() != true){
-            String chooseNewGroupTrainer = groupService.getGroup(idGroup).getName();
-            modelAndView.addObject("chooseTrainerGroup", chooseNewGroupTrainer);
+        for(Price p: priceList){
+            System.out.println(p.getPriceSingle()+" price to jsp");
+        }
+        if(!priceList.isEmpty()){
+            modelAndView.addObject("priceList",priceList);
         }
 
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
         modelAndView.addObject("listOfMonth", ListOfDayInMonth());
+        modelAndView.addObject("currentUser", getCurrentUser());
         modelAndView.setViewName("A_small_fitness_group");
         return modelAndView;
     }
@@ -469,6 +480,59 @@ public class A_GroupController {
         }
             return "redirect:/group//ShowGroupPage";
         }
+
+        @RequestMapping("/showFormAddOrChangePriceAbonement")
+        public  String showFormAddOrChangePrice( Model theModel){
+
+            Price price = new Price();
+            theModel.addAttribute("price", price);
+
+            for(Price p: priceService.getAll()){
+                if (idGroup==p.getGroups().getId()){
+                    theModel.addAttribute("price",p);
+
+                    break;
+                }
+
+            }
+
+            return "a_small_fitness/add_form/A_small_fitness_addOrChange_price_of_abonement";
+        }
+
+    @PostMapping("/saveOrChangeAbonement")
+    public String addOrChangeAbonement(@ModelAttribute("price") Price price) {
+
+        boolean flag=true;
+        Group group = groupService.getGroup(idGroup);
+        if(!priceService.getAll().isEmpty() ) {
+            for (Price p: priceService.getAll()){
+                if ( p!=null && idGroup == p.getGroups().getId()){
+                    System.out.println("in if check");
+                        p.setPriceMonth(price.getPriceMonth());
+                        p.setPriceMonthHalf(price.getPriceMonthHalf());
+                        p.setPriceSingle(price.getPriceSingle());
+                        priceService.addPrice(p);
+                        flag=true;
+                        break;
+                    }
+                    flag=false;
+            }
+            if (flag==false){
+                price.setGroups(group);
+                price.setUser(getCurrentUser());
+                priceService.addPrice(price);
+                    flag=true;
+            }
+        }
+
+        if(priceService.getAll().isEmpty()) {
+            System.out.println("in is empty");
+            price.setGroups(group);
+            price.setUser(getCurrentUser());
+            priceService.addPrice(price);
+        }
+        return "redirect:/group/ShowGroupPage";
+    }
 
 
 

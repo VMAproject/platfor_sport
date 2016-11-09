@@ -117,3 +117,8 @@ tr:nth-child(odd) {background:#FFFFFF}
 
 tr:hover {background-color:#b69532;}
 td:hover {background-color:#ffa8ff;}
+
+/*// add style to the select type*/
+.chooseBlock{
+	background-color: #0775D3;
+}

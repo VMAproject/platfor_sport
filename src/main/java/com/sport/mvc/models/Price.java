@@ -25,6 +25,8 @@ public class Price extends Model{
     @Column(name = "price_month_half")
     private int priceMonthHalf;
 
+
+
     @OneToMany(mappedBy = "price", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CustomerCard> cards = new HashSet<>();
 
@@ -34,6 +36,10 @@ public class Price extends Model{
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "group_id")
+    private Group groups;
 
     public Price() {
         super();
@@ -94,6 +100,15 @@ public class Price extends Model{
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Group getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Group groups) {
+        this.groups = groups;
+    }
+
     //
 //    public void setUsers(Set<User> users) {
 //        this.users = users;
