@@ -3,7 +3,6 @@ package com.sport.mvc.Controllers.smoll_fintess;
 import com.sport.mvc.models.Role;
 import com.sport.mvc.models.User;
 import com.sport.mvc.services.UserService;
-import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,8 +52,8 @@ public class LoginController {
         Boolean save = userservice.addUser(user);
 
         if (save) {
-			response.put("suceess", true);
-	        response.put("message", "Registration Sucess");
+			response.put("success", true);
+	        response.put("message", "Registration Success");
 			return response;
 		}else {
             response.put("error", true);
@@ -69,7 +68,7 @@ public class LoginController {
         if (auth != null){    
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-		return "redirect:/index";
+        return "redirect:/index";
     }
 
 }

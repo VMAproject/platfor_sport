@@ -45,8 +45,7 @@ public class User extends Model {
     @Column(name = "district")
     private String district;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "session_history_id")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private SessionHistory sessionHistory;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)

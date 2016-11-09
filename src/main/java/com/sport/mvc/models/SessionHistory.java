@@ -20,8 +20,9 @@ public class SessionHistory extends Model {
     @Column(name = "browser")
     private String browser;
 
-    @OneToMany(mappedBy = "sessionHistory" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<User> users = new HashSet<>();
+    @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    private User user;
 
     public SessionHistory() {
         super();
@@ -51,16 +52,14 @@ public class SessionHistory extends Model {
         this.sessionDate = sessionDate;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
-    
-
-//    @Override
+    //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
 //        if (o == null || getClass() != o.getClass()) return false;

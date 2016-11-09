@@ -1,6 +1,5 @@
 package com.sport.mvc.Controllers.smoll_fintess;
 
-
 import com.sport.mvc.models.User;
 import com.sport.mvc.services.UserService;
 import org.slf4j.Logger;
@@ -28,11 +27,8 @@ public class HomeController {
     @Autowired
     HttpSession response;
 
-
-	
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     	if (principal instanceof UserDetails) {
@@ -42,12 +38,9 @@ public class HomeController {
             log.info("Welcome to your cabinet!");
 			return "index";
     	}else {
-
 			log.info("Welcome to your cabinet!");
 			return "index";
 		}
 	}
 
-
-	
 }

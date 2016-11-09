@@ -50,7 +50,7 @@ $(document).ready(function($) {
 		        xhr.setRequestHeader(header, token);
 		    },
 			success  : function(resonse) {
-				var message = "registration Sucess";
+				var message = "registration Success";
 				//				$("#msg").html(data.message);
 				console.log(resonse.data);
 				alert(resonse.message);
