@@ -169,38 +169,6 @@ public class A_PersonsController {
         return "redirect:/registerPerson/showFormForAdd";
     }
 
-//    @RequestMapping("/delete")
-//    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String deletee,
-//                                    @RequestParam(value = "send_email", required = false) String sendEmail, Model model,
-//                                    @RequestParam(value = "case", required = false) List <Long> ids,
-//                                    @RequestParam(value = "send_complex_email", required = false) String complexEmail,
-//                                    RedirectAttributes ra) {
-//
-//
-//        if(deletee!=null){
-//            if (ids!=null)
-//
-//                for (int i =0; i < ids.size();i++) {
-//                    System.out.println("in method A_controller del " + ids );
-//                    studentService.deleteListOfStudents(ids.get(i));
-//                }
-//        }
-//        else if (complexEmail!=null) {
-//            //redirect ids to the send complex message page
-//            ra.addFlashAttribute("id", ids);
-//            return "redirect:/registerPerson/showComplexMailForm";
-//        }
-//
-//        else if(sendEmail!=null){
-//            //redirect our ids to the send message page
-//            ra.addFlashAttribute("id", ids);
-//            return "redirect:/registerPerson/showMailForm";
-//
-//
-//        }
-//
-//        return "redirect:/registerPerson/showFirstWorkPage";
-//    }
 
 
     @RequestMapping(value = "/act")
@@ -215,7 +183,7 @@ public class A_PersonsController {
                                     RedirectAttributes ra) {
         if (addToGroup!=null) {
             Long groupId = null;
-            System.out.println("in add to group");
+
             Set<Group> groupSet = new HashSet<>();
             List<Group> groups = groupService.getAll();
             for (int i = 0; i<groups.size(); i++) {
@@ -438,26 +406,56 @@ public class A_PersonsController {
  //   sorts students by age(after 16, befor 16 and select all student
     @RequestMapping("/sort")
     public ModelAndView sortMethod(Model model, @RequestParam("option") String option) {
-        List<Student> students =new ArrayList<>();
+      //  List<Student> students =new ArrayList<>();
         //new modelAndView for return to jsp listStudent with the selected parameters
         ModelAndView modelAndView = new ModelAndView();
-        if (option.equals("ageAfterSixteen")) {
+        List<Student> students = new ArrayList<>();
 
-             students = studentService.getStudentAgeAfterSixteen();
-        }
-       else if (option.equals("ageBeforeSixteen")){
-           students = studentService.getStudentAgeBeforSixteen();
+            if (option.equals("ageAfterSixteen")) {
+                for (Student s : studentService.getAll()) {
+                    if (s.getUser().getId() != getCurrentUser().getId() || s.getAge() == null || s.getAge().equals("")) {
+                        continue;
+                    }
+                    int age = Integer.parseInt(s.getAge());
+                    if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId() &&
+                            age > 16) {
+                        students.add(s);
 
-        }
+                    }
+                }
+            } else if (option.equals("ageBeforeSixteen")) {
+                for (Student s : studentService.getAll()) {
+                    if (s.getUser().getId() != getCurrentUser().getId() || s.getAge() == null || s.getAge().equals("")) {
+                        continue;
+                    }
+                    int age = Integer.parseInt(s.getAge());
+                    if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId() &&
+                            age <16) {
+                        students.add(s);
 
-        else  if(option.equals("getUnknownStudent")){
-            students =studentService.getStudentByOnlyUnknownStudent();
-        }
+                    }
+                }
+            } else if (option.equals("getUnknownStudent")) {
+                for (Student s : studentService.getAll()) {
+                    if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId()) {
 
-        else if(option.equals("allStudent")){
-            students = studentService.getAll();
+                        if (!s.getName().equals("") || !s.getSurname().equals("") || !s.getEmail().equals("") ||
+                                !(s.getName() == null) || !(s.getSurname() == null) || !(s.getEmail() == null)) {
+                            continue;
+                        }
+                        students.add(s);
+                    }
 
-        }
+                }
+            } else if (option.equals("allStudent")) {
+                for (Student s : studentService.getAll()) {
+                    if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId()) {
+                        students.add(s);
+                    }
+                }
+
+            }
+
 
             modelAndView.addObject("students", students);
             modelAndView.setViewName("A_small_fitness_first_work_Page");
@@ -466,9 +464,14 @@ public class A_PersonsController {
 
     }
 
-    @RequestMapping(value = "/find", method = RequestMethod.POST)
+    @RequestMapping(value = "/find")
     public ModelAndView findStudent(@RequestParam(value = "data", required = false) String data,
-                                    @RequestParam(value = "option", required = false) String option) {
+                                    @RequestParam(value = "option", required = false) String option){
+
+        System.out.println("in method find");
+        System.out.println(data+ " the data");
+        System.out.println(option+ "option");
+
         ModelAndView modelAndView = new ModelAndView();
         List<Student> students = studentService.getAll();
         Set<Student> particularCollision = new LinkedHashSet<Student>();

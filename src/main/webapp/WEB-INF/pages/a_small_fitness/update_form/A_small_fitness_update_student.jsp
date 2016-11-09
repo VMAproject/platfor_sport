@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 12.10.2016
-  Time: 15:29
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -36,9 +30,7 @@
             <li><a href="#">Главная</a></li>
             <li><a href="/group/ShowGroupPage">Группы</a></li>
             <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>
-            <%--<li><a href="#">Просмотр моей страници</a></li>--%>
-            <%--<li><a href="#">Статистика</a></li>--%>
-            <%--<li><a href="#">Расчеты</a></li>--%>
+
         </ul>
 
         <!-- LOGIN FORM -->

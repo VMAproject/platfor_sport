@@ -30,55 +30,40 @@
             <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>
         </ul>
 
-        <!-- LOGIN FORM -->
-        <form action="#" class="login">
-            <input type="text" placeholder="Login" required>
-            <input type="password" placeholder="Password" required>
-            <input type="submit" value="Sign In">
-        </form>
-        <!-- /LOGIN FORM -->
+
     </div>
 </nav>
 
 
 <div class="container addgroup_form">
-    <h1>Update name of group</h1>
+    <h1>Delete group</h1>
     <br>
-    <form:form action="updateGroup" modelAttribute="group" method="POST">
-        <form:hidden path="id" />
-        <table>
-            <tbody>
-            <tr>
-                <td><label>Введите новое название группы:</label></td>
-                <td><form:input path="name" /></td>
-            </tr>
+    <form:form action="deleteGroups"  method="get">
 
-            <tr>
-            <select name="option">
-                <option value="">выберите группу</option>
-
+        <li> Group
+            <ul>
                 <c:forEach items="${groupList}" var="groups">
 
-                    <option value="${groups.id}">
-                    <c:choose>
-                        <c:when test="${groups.main==true}">
-                            <c:out value="${groups.name}"/>
-                        </c:when>
-                        <c:when test="${groups.main!=true}">
-                            <c:out value="${groups.name}"/>
-                        </c:when>
-                    </c:choose>
-                    </option>
+                    <c:if test="${groups.main==true}">
+                <li>${groups.name}  <input type="checkbox" class="idGroup", name="idGroup" value="${groups.id}"></li>
+                </c:if>
                 </c:forEach>
-            </select>
-                </tr>
-            <tr>
-            <td><label></label></td>
-                <td><input type="submit" value="Save" class="save" /></td>
-            </tr>
+            </ul>
+        </li>
 
-            </tbody>
-        </table>
+        <li> Trainers Group
+            <ul>
+                <c:forEach items="${groupList}" var="groups">
+
+                    <c:if test="${groups.main!=true}">
+                        <li>${groups.name} <input type="checkbox" class="idGroup", name="idGroup" value="${groups.id}"></li>
+                    </c:if>
+                </c:forEach>
+            </ul>
+        </li>
+
+                <td><input type="submit" value="Delete" class="delete" /></td>
+
     </form:form>
 </div>
 

@@ -28,8 +28,12 @@ public class Price extends Model{
     @OneToMany(mappedBy = "price", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CustomerCard> cards = new HashSet<>();
 
-    @OneToMany(mappedBy = "price", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<User> users = new HashSet<>();
+//    @OneToMany(mappedBy = "price", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<User> users = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Price() {
         super();
@@ -83,10 +87,14 @@ public class Price extends Model{
         this.cards = cards;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
-//
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    //
 //    public void setUsers(Set<User> users) {
 //        this.users = users;
 //    }

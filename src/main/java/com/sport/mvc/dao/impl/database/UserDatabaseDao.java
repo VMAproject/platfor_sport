@@ -3,6 +3,7 @@ package com.sport.mvc.dao.impl.database;
 import com.sport.mvc.dao.UserDao;
 
 import com.sport.mvc.models.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 
@@ -26,6 +27,7 @@ public class UserDatabaseDao extends HibernateAbstractDao<User> implements UserD
             return false;
         }
     }
+
     @Override
     public boolean userExists(String username) {
         List<User> userList = getSession().createQuery("FROM User").list();
@@ -34,6 +36,7 @@ public class UserDatabaseDao extends HibernateAbstractDao<User> implements UserD
 
 
     @Override
+//    @Query("FROM User u WHERE u.username = ")
     public User getUserByUsername(String userName) {
         String likeName="'"+userName+"'";
         List<User> userList = getSession().createQuery("FROM User u WHERE u.username = "+likeName).list();

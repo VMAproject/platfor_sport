@@ -56,7 +56,7 @@
                 <li><a href="#">controls</a>
                     <ul>
                         <li><a href="/group//showFormForUpdate">Update</a></li>
-                        <li><a href="#">Delete</a></li>
+                        <li><a href="/group//showFormForDelete">Delete</a></li>
                         <li><a href="/group//showFormForAddGroup">new group</a></li>
                     </ul>
                 </li>
@@ -117,7 +117,7 @@
                 <li><a href="#">controls</a>
                     <ul>
                         <li><a href="/group//showFormForUpdate">Update</a></li>
-                        <li><a href="#">Delete</a></li>
+                        <li><a href="/group//showFormForDelete">Delete</a></li>
                         <li><a href="/group//AddGroupToInstructorsForm">new group</a></li>
                     </ul>
                 </li>
