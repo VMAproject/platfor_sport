@@ -1,39 +1,48 @@
 package com.sport.mvc.models;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
 public class User extends Model {
 
     private static final long serialVersionUID = -8950386400041310256L;
-
+    @NotNull(message="Имя должно быть задано")
+    @Size(min = 5, message="Длина имени должна быть больше трех")
     @Column(name = "name")
     private String name;
 
+    @NotNull(message="Фамилия должна быть задана")
+    @Size(min = 5, message="Длина фамилии должна быть больше трех")
     @Column(name = "surname")
     private String surname;
 
+    @NotNull(message="Имэйл должен быть задан")
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+            message = "заданный имэйл не может существовать")
     @Column(name = "email")
     private String email;
 
     @Column(name = "birthday")
     private Date birthday;
 
+    @Pattern(regexp = "^\\+?38\\(?0\\d{2}\\)?\\d{3}-?\\d{2}-?\\d{2}$",
+            message ="Некоректный номер телефона" )
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "username")
+    @Size(min = 5, message="Длина логина должна быть больше 5 символов")
+    @Column(name = "username",unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @Size(min=5, message="Длина пароля должна быть больше 5 символов")
+    @Column(name = "password", nullable = false )
     private String password;
 
     @Column(name = "city")
