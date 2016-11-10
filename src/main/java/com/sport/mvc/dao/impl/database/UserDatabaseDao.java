@@ -15,9 +15,9 @@ public class UserDatabaseDao extends HibernateAbstractDao<User> implements UserD
 
     @Override
     public boolean addUser(User user) {
+
         try {
             getSession().save(user);
-
             return true;
         } catch (Exception e) {
             e.printStackTrace();
