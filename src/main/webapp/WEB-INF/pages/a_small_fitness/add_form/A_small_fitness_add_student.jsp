@@ -46,8 +46,16 @@
 
 <div class="container addstudent_form">
     <h1>Add student </h1>
-    <h2>${nullFields}</h2>
+    <h2 style="color: red">${nullFields}</h2>
     <br>
+
+    <%--Placeholder for inputs--%>
+    <spring:message code="placeholder.input.name" var="name"/>
+    <spring:message code="placeholder.input.surnamename" var="surname"/>
+    <spring:message code="placeholder.input.phone" var="phone"/>
+    <spring:message code="placeholder.input.email" var="email"/>
+    <spring:message code="placeholder.input.age" var="age"/>
+    <%--End of placeholder intputs--%>
     <form:form action="saveStudent" modelAttribute="student" method="POST">
         <form:hidden path="id" />
 
@@ -55,38 +63,38 @@
             <tbody>
             <tr>
                 <td><label>Имя:</label></td>
-                <td ><form:input path="name" />
+                <td ><form:input path="name"  placeholder="${name}"/>
                     <form:errors path="name" class="alert alert-danger"></form:errors>
                 </td>
-                <td>${moreChar}</td>
+                <td style="color: red">${moreChar}</td>
             </tr>
             <br>
             <tr>
                 <td><label>Фамилия:</label></td>
-                <td><form:input path="surname" /></td>
-                <td>${moreCharSereName}</td>
+                <td><form:input path="surname" placeholder="${surname}"/></td>
+                <td style="color: red">${moreCharSereName}</td>
             </tr>
             <br>
             <tr>
                 <td ><label>Телефон:</label></td>
-                <td><form:input path="phone" /><form:errors path="phone"  class="alert alert-danger"></form:errors></td>
-                <td>${moreNumber}</td>
+                <td><form:input path="phone" placeholder="${phone}"/><form:errors path="phone"  class="alert alert-danger"></form:errors></td>
+                <td style="color: red">${moreNumber}</td>
             </tr>
             <br>
             <tr>
                 <td><label>Email:</label></td>
-                <td><form:input path="email" /><form:errors path="email" class="alert alert-danger"></form:errors></td>
+                <td><form:input path="email" placeholder="${email}"/><form:errors path="email" class="alert alert-danger"></form:errors></td>
             </tr>
             <br>
             <tr>
-                <td><label>Birthday in format (dd.mm.yyyy):</label></td>
-                <td><form:input path="birthday" /><form:errors path="birthday" cssclass="alert alert-danger"></form:errors></td>
+                <td><label>Birthday:</label></td>
+                <td><form:input type="date" path="birthday" /><form:errors path="birthday" cssclass="alert alert-danger"></form:errors></td>
             </tr>
             <br>
             <tr>
                 <td><label>Возвраст:</label></td>
-                <td><form:input path="age" /></td>
-                <td>${ageException}</td>
+                <td><form:input path="age" placeholder="${age}"/></td>
+                <td style="color: red">${ageException}</td>
             </tr>
             <tr>
                 <td><label>Post:</label></td>

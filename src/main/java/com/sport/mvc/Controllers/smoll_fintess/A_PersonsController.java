@@ -123,8 +123,37 @@ public class A_PersonsController {
   if(!categoryGroupList.isEmpty()) {
       modelAndView.addObject("categoryList", categoryGroupList);
   }
-
+        int studentWithoutName = 0;
+        int studentWithoutSurname = 0;
+        int studnetWithoutPhone = 0;
+        int studnetWithoutEmail = 0;
+        int studentBefore16 = 0;
+        int studentAfter16 = 0;
+        for (int i = 0; i<studentsList.size(); i++) {
+            Student student = studentsList.get(i);
+            if (student.getName()==null || student.getName().equals(""))
+                studentWithoutName++;
+            if (student.getSurname()==null || student.getSurname().equals(""))
+                studentWithoutSurname++;
+            if (student.getPhone()==null || student.getPhone().equals(""))
+                studnetWithoutPhone++;
+            if (student.getEmail()==null || student.getEmail().equals(""))
+                studnetWithoutEmail++;
+            if (student.getAge()!=null && !student.getAge().equals("")) {
+                if (Integer.parseInt(student.getAge()) > 16)
+                    studentAfter16++;
+                if (Integer.parseInt(student.getAge()) < 16)
+                    studentBefore16++;
+            }
+        }
+        modelAndView.addObject("withoutPhone", studnetWithoutPhone);
+        modelAndView.addObject("withoutName", studentWithoutName);
+        modelAndView.addObject("withoutSurname", studentWithoutSurname);
+        modelAndView.addObject("withoutEmail", studnetWithoutEmail);
+        modelAndView.addObject("before16", studentBefore16);
+        modelAndView.addObject("after16", studentAfter16);
         modelAndView.addObject("currentUser", getCurrentUser());
+        modelAndView.addObject("countOfRecords", studentsList.size());
         modelAndView.setViewName("A_small_fitness_first_work_Page");
         return modelAndView;
 
@@ -136,7 +165,7 @@ public class A_PersonsController {
     public void initBinder(WebDataBinder binder)
     {
         //format of date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(
                 dateFormat, true));
