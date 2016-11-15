@@ -23,6 +23,11 @@ import java.util.*;
 public class A_GroupController {
 
     @Autowired
+    @Qualifier("customerCardService")
+    private CustomerCardService customerCardService;
+
+
+    @Autowired
     @Qualifier("groupService")
     private GroupService groupService;
 
@@ -54,6 +59,16 @@ public class A_GroupController {
         List<CategoryGroup> categoryGroupList = new ArrayList<>();
         List<Group> groupsList = new ArrayList<>();
         List<Student> studentsListInGroup = new ArrayList<>();
+        List<CustomerCard> customerCardsList = new ArrayList<>();
+
+        for (Student s : studentService.getAll()) {
+            for (CustomerCard card : customerCardService.getAll()) {
+
+                if (card != null && card.getStudent().getId() ==s.getId()){
+                    customerCardsList.add(card);
+                }
+            }
+        }
 
         for (Student s : studentService.getAll()) {
 //check, if user has this student, add to student list
@@ -108,15 +123,13 @@ public class A_GroupController {
 
             }
         }
-        for(Price p: priceList){
-            System.out.println(p.getPriceSingle()+" price to jsp");
-        }
+
         if(!priceList.isEmpty()){
             modelAndView.addObject("priceList",priceList);
         }
 
-        for (int i = 0; i<studentsListInGroup.size(); i++) {
-
+        if(!customerCardsList.isEmpty()){
+            modelAndView.addObject("customerCardList", customerCardsList);
         }
         modelAndView.addObject("countOfRecords", studentsListInGroup.size());
         //add to page model list of day in current month from method List<String> ListOfDayInMonth()
@@ -471,8 +484,8 @@ public class A_GroupController {
     }
 
 
-    @RequestMapping(value = "/act", method = RequestMethod.POST)
-    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String deletee,
+    @RequestMapping(value = "/act")
+    public String deleteListOfUsers(@RequestParam(value = "delete", required = false) String delete,
                                     @RequestParam(value = "case", required = false) List<Long> ids,
                                     @RequestParam(value = "set", required = false) String set,
                                     @RequestParam(value = "selectedPrice", required = false) String price,
@@ -480,11 +493,30 @@ public class A_GroupController {
                                     @RequestParam(value = "selectedFinisfDate", required = false) String secondDate,
                                     @RequestParam(value = "selectedCode", required = false) String paymentStatus) {
         if (set != null) {
+            System.out.println(" in method add");
+
+
+            int price2 = Integer.valueOf(price);
+            System.out.println(price2+" ---price");
+            System.out.println(ids.size()+"size");
+            Student  theStudent = new Student();
+            for(int i=0; i<ids.size();i++){
+                System.out.println(ids.get(i)+"  id st");
+
+                theStudent =studentService.getStudent(ids.get(i));
+
+
+            }
+            CustomerCard customerCard = new CustomerCard(price2,firstDte,secondDate,paymentStatus,theStudent);
+
+            customerCardService.addCustomerCard(customerCard);
+
+
 
         }
 
 
-       else if (deletee != null) {
+       else if (delete != null) {
             if (ids != null)
 
                 for (int i = 0; i < ids.size(); i++) {
