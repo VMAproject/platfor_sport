@@ -23,9 +23,7 @@ public class User extends Model {
     @Column(name = "surname")
     private String surname;
 
-    @NotNull(message="Имэйл должен быть задан")
-    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
-            message = "заданный имэйл не может существовать")
+    @org.hibernate.validator.constraints.Email
     @Column(name = "email")
     private String email;
 

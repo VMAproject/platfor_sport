@@ -37,6 +37,7 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
 	public Map<String, Object> registration(@RequestBody User user) {
+
 		Map<String, Object> response= new HashMap<String, Object>();
 
         Role role = new Role();

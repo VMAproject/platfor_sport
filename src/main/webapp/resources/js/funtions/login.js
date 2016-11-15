@@ -50,7 +50,7 @@ $(document).ready(function($) {
 		        xhr.setRequestHeader(header, token);
 		    },
 			success  : function(resonse) {
-				var message = "registration Sucess";
+				var message = "Регистрация прошла успешно";
 				//				$("#msg").html(data.message);
 				console.log(resonse.data);
 				alert(resonse.message);
@@ -59,7 +59,7 @@ $(document).ready(function($) {
 			},
 			error 	 : function(e) {
 				console.log("ERROR: ",e);
-				alert("registration falied");
+				alert("Ошибка регистрации. Поле логин пустое или данный логин существует");
 //						$("#msg").html(e.message);
 				data = null;
 				document.getElementById("registerForm").reset()
