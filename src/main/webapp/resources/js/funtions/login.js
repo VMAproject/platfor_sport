@@ -49,6 +49,7 @@ $(document).ready(function($) {
 		        xhr.setRequestHeader("Content-Type", "application/json");
 		        xhr.setRequestHeader(header, token);
 		    },
+
 			success  : function(resonse) {
 				var message = "Регистрация прошла успешно";
 				//				$("#msg").html(data.message);
