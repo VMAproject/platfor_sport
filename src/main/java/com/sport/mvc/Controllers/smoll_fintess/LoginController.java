@@ -28,6 +28,11 @@ public class LoginController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@RequestMapping("/login_dop")
+	public String ShowLogin(){
+		return "login_dop";
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {

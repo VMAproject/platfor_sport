@@ -46,3 +46,14 @@ function checkPhone() {
         $('#e_phone').text('Поле e-mail не должно быть пустым!');
     }
 };
+
+
+function checkLoginA(username) {
+    if (username.length < 5) document.getElementById("a_login").style.display = "inline";
+    else document.getElementById("a_login").style.display = "none";
+}
+
+function checkPasswordA(password) {
+    if (password.length < 5) document.getElementById("a_password").style.display = "inline";
+    else document.getElementById("a_password").style.display = "none";
+}

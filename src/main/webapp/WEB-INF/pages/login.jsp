@@ -48,8 +48,10 @@
 			    <p class="message">Already registered? <a href="#" onclick="toggle_visibility(); return false;" class="message">Sign In</a></p>
 			    </form>
 			    <form class="login-form" action="<c:url value='/login' />" method="post">
-			      <input type="text" name="username" placeholder="username" autocomplete="off"/>
-			      <input type="password" name="password" placeholder="password"/>
+			      <input type="text" name="username" placeholder="username" autocomplete="off" onkeyup="checkLoginA(this.value)"/>
+					<span id="a_login" style="display: none; color: #c00;">Логин введён неправильно. Минимум 5 символов</span></p>
+			      <input type="password" name="password" placeholder="password" onkeyup="checkPasswordA(this.value)"/>
+					<span id="a_password" style="display: none; color: #c00;">Пароль введён неправильно. Минимум 5 символов</span></p>
 			      <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
 			      <button>login</button>
 			      <p class="message">Not registered? <a href="#" onclick="toggle_visibility(); return false;" class="message">Create an account</a></p>

@@ -16,7 +16,6 @@
     <spring:url value="/resources/vide/motiv.mp4" var="motiv" />
     <spring:url value="/resources/vide/movie.mp4" var="movie" />
     <script src="<c:url value="/resources/script/js.js" />"></script>
-
     <%--<script src="${js}"></script>--%> <!--another example-->
 
     <link rel="stylesheet" type="text/css" href="${style}" >
@@ -41,6 +40,7 @@
             <%--<li><a href="/showChooseRegisterForm">Старт</a></li>--%>
             <li><a href="#">Контакты</a></li>
             <li><a href="/login">Войти</a></li>
+            <li><a href="/login_dop">Войти доп </a> </li>
         </ul>
 
         <!-- LOGIN FORM -->
