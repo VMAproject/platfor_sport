@@ -15,14 +15,12 @@
     <spring:url value="/resources/images/profile.jpg" var="image" />
     <spring:url value="/resources/vide/motiv.mp4" var="motiv" />
     <spring:url value="/resources/vide/movie.mp4" var="movie" />
-
     <script src="<c:url value="/resources/script/js.js" />"></script>
 
     <%--<script src="${js}"></script>--%> <!--another example-->
 
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
-
 </head>
 <body>
 <!-- HEADER -->
@@ -40,16 +38,18 @@
     <div class="container">
         <ul>
             <li><a href="#">Главная</a></li>
-            <li><a href="/showChooseRegisterForm">Старт</a></li>
+            <%--<li><a href="/showChooseRegisterForm">Старт</a></li>--%>
             <li><a href="#">Контакты</a></li>
+            <li><a href="/login">Войти</a></li>
         </ul>
 
         <!-- LOGIN FORM -->
-        <form action="#" class="login">
-            <input type="text" placeholder="Login" required>
-            <input type="password" placeholder="Password" required>
-            <input type="submit" value="Sign In">
-        </form>
+        <%--<form action="#" class="login">--%>
+            <%--<input type="text" placeholder="Login" required>--%>
+            <%--<input type="password" placeholder="Password" required >--%>
+            <%--<input type="submit" value="Sign In">--%>
+        <%--</form>--%>
+
         <!-- /LOGIN FORM -->
     </div>
 </nav>

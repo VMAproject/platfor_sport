@@ -16,9 +16,12 @@ $RECYCLE.BIN/
 *.idea
 *.iml
 *.md
+<<<<<<< HEAD
+=======
 *.mp4
 *.jpg
 *.png
+>>>>>>> ArtyrGetman/test
 target/
 .targer/
 

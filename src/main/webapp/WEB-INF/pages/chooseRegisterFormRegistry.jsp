@@ -6,6 +6,7 @@
 
 <head>
 <title>Choose Register</title>
+    <meta charset="utf-8">
 
     <spring:url value="/resources/css/chooseRegisterFormRegistry.css" var="style" />
     <spring:url value="/resources/css/normalize.css" var="normalize" />
@@ -14,6 +15,10 @@
 
     <link rel="stylesheet" type="text/css" href="${style}" >
     <link rel="stylesheet" type="text/css" href="${normalize}" >
+
+    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+
 
 
 
@@ -36,7 +41,7 @@
 <nav class="page-navigation">
     <div class="container">
         <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="#">Home</a></li>
             <li><a href="/showPage">GO-GO-GO</a></li>
             <li><a href="#">Contacts</a></li>
         </ul>
@@ -59,64 +64,56 @@
     First, tell us what you're looking for.
   </h3>
 
-    <div class="container-first">
+    <table class="table">
+        <thead>
 
-        <div class="collections-first">
-            <div class="collection-item-outer-first" >
-                <div class="collection-item-first">
+        </thead>
+        <tbody>
+        <tr class="active">
+            <td>I want to register like a trainer</td>
+            <td><a href="/home"> REGISTER </a> </td>
+        </tr>
+        <tr class="success">
+            <td>I want to register as a fitness center</td>
+            <td><a href="/registerPerson/registerFitnessCenter">REGISTER</a></td>
+        </tr>
+        <tr class="info">
+            <td>I want to register as a guest</td>
+            <td><a href="/registerPerson/registerGuest"> REGISTER </a> </td>
+        </tr>
+        <tr class="warning">
+            <td>I want to register as a studio or sports section</td>
+            <td><a href="/registerPerson/registerSportsSection"> REGISTER </a></td>
+        </tr>
 
-                    <h3>I want to register like a traine</h3>
-
-                    <br/><br/>
-
-
-                  <h3>  <a href="/registerPerson/general_registration_form"> REGISTER</a></h3>
-                    <br/><br/>
-                </div>
-            </div>
-
-            <div class="collection-item-outer-first" >
-                <div class="collection-item-first">
-                    <p><pre>
-
-                |
-                |
-                |
-                |
-                OR
-                |
-                |
-                |
-</pre>
-                            </p>
+        </tbody>
+    </table>
 
 
-</div>
-</div>
-
-            <div class="collection-item-outer-first">
-
-                <div class="collection-item-first">
-
-                    <h3>I want to register  like a finnes Center</h3>
+    <%--<div class="container-first">--%>
 
 
-                            <br/><br/>
+                    <%--<h3></h3>--%>
 
 
-                            <button ><a href="/registerPerson/showForm">REGISTER</a></button>
+                  <%--<h3>  <a href="/registerPerson/general_registration_form"> REGISTER</a></h3>--%>
 
 
 
-                </div>
-            </div>
-        </div>
+                    <%--<h3>I want to register  like a finnes Center</h3>--%>
+
+                            <%--<button ><a href="/registerPerson/showForm">REGISTER</a></button>--%>
 
 
 
-    </div>
-    <br/><br/><br/><br/> <br/><br/> <br/><br/> <br/><br/>
-    <br/><br/><br/><br/>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+
+
+
+    <%--</div>--%>
+
     </main>
 <!-- /MAIN SECTION -->
 <!-- FOOTER -->
@@ -126,6 +123,5 @@
     </div>
 </footer>
 <!-- /FOOTER -->
-
 </body>
 </html>
