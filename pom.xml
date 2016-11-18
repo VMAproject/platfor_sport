@@ -215,35 +215,41 @@
 
      <!--// for heroku-->
         <!--Heroku dependecies-->
+        <!--<dependency>-->
+            <!--<groupId>com.sparkjava</groupId>-->
+            <!--<artifactId>spark-core</artifactId>-->
+            <!--<version>1.1.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.spark</groupId>-->
+            <!--<artifactId>spark-streaming-kafka_2.10</artifactId>-->
+            <!--<version>1.2.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.spark</groupId>-->
+            <!--<artifactId>spark-core_2.10</artifactId>-->
+            <!--<version>1.2.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.spark</groupId>-->
+            <!--<artifactId>spark-streaming_2.10</artifactId>-->
+            <!--<version>1.2.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.spark</groupId>-->
+            <!--<artifactId>spark-hive_2.10</artifactId>-->
+            <!--<version>1.2.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.spark</groupId>-->
+            <!--<artifactId>spark-sql_2.10</artifactId>-->
+            <!--<version>1.2.1</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka_2.10</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.10</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_2.10</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-hive_2.10</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.10</artifactId>
-            <version>1.2.1</version>
+            <version>2.5</version>
         </dependency>
 
 
