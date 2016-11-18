@@ -123,19 +123,18 @@ public class A_PersonsController {
   if(!categoryGroupList.isEmpty()) {
       modelAndView.addObject("categoryList", categoryGroupList);
   }
-        int studentWithoutName = 0;
-        int studentWithoutSurname = 0;
+
         int studnetWithoutPhone = 0;
         int studnetWithoutEmail = 0;
         int studentBefore16 = 0;
         int studentAfter16 = 0;
         for (int i = 0; i<studentsList.size(); i++) {
             Student student = studentsList.get(i);
-            if (student.getName()==null || student.getName().equals(""))
-                studentWithoutName++;
-            if (student.getSurname()==null || student.getSurname().equals(""))
-                studentWithoutSurname++;
-            if (student.getPhone()==null || student.getPhone().equals(""))
+
+            if (student.getPhone()!=null && student.getName()==null && student.getSurname()==null &&
+                    student.getEmail()==null ||
+                    !student.getPhone().equals("") && student.getName().equals("") && student.getSurname().equals("") &&
+                            student.getEmail().equals(""))
                 studnetWithoutPhone++;
             if (student.getEmail()==null || student.getEmail().equals(""))
                 studnetWithoutEmail++;
@@ -147,8 +146,6 @@ public class A_PersonsController {
             }
         }
         modelAndView.addObject("withoutPhone", studnetWithoutPhone);
-        modelAndView.addObject("withoutName", studentWithoutName);
-        modelAndView.addObject("withoutSurname", studentWithoutSurname);
         modelAndView.addObject("withoutEmail", studnetWithoutEmail);
         modelAndView.addObject("before16", studentBefore16);
         modelAndView.addObject("after16", studentAfter16);

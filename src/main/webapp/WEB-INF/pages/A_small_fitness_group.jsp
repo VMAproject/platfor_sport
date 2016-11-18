@@ -243,7 +243,7 @@
         <%--Table form--%>
         <div class="table form">
 
-            <form method="post" action="act">
+            <form method="get" action="/group//act">
                 <input type="hidden" id="txt" name="">
                 <input type="button" value="Добавить"
                        onclick="window.location.href='addStudentToGroupForm'; return false;" class="add-button"
@@ -287,18 +287,55 @@
                 <td>
 
                     <select name="selectedPrice">
-                        <option value="0">abonement price</option>
+
+                        <%--//get price for student from db--%>
+                        <c:forEach items="${customerCardList}" var="customerCard">
+
+                               <%--<c:choose>--%>
+
+                                <c:if test="${student.id==customerCard.student.id}">
+                                    <option >${customerCard.price}</option>
+                                </c:if>
+
+
+                            <%--<c:if test="${student.id!=customerCard.student.id }">--%>
+                                <%--<option >abonement price</option>--%>
+                            <%--</c:if>--%>
+
+
+
+                            <%--</c:choose>--%>
+
+                        </c:forEach>
+
                         <c:forEach items="${priceList}" var="prices">
                             <%--<c:choose>--%>
-                            <c:if test="${prices.priceMonth!=0}">
-                            <option value="prices"><c:out value="${prices.priceMonth}"/></option>
+                            <%--//--%>
+                            <c:if test="${prices.priceOther!=0}">
+                                <option value="${prices.priceOther}">other <c:out value="${prices.priceOther}"/></option>
                             </c:if>
-                                <c:if test="${prices.priceMonth!=0}">
-                                    <option value="prices"><c:out value="${prices.priceMonthHalf}"/></option>
+
+                            <c:if test="${prices.priceIndividual!=0}">
+                                <option value="${prices.priceIndividual}">individual <c:out value="${prices.priceIndividual}"/></option>
+                            </c:if>
+
+                            <c:if test="${prices.priceYear!=0}">
+                                <option value="${prices.priceYear}">year <c:out value="${prices.priceYear}"/></option>
+                            </c:if>
+
+                            <c:if test="${prices.priceMonth!=0}">
+                            <option value="${prices.priceMonth}">month <c:out value="${prices.priceMonth}"/></option>
+                            </c:if>
+
+                                <c:if test="${prices.priceMonthHalf!=0}">
+                                    <option value="${prices.priceMonthHalf}">half month <c:out value="${prices.priceMonthHalf}"/></option>
                                 </c:if>
-                                <c:if test="${prices.priceMonth!=0}">
-                                    <option value="prices"><c:out value="${prices.priceSingle}"/></option>
+
+                                <c:if test="${prices.priceSingle!=0}">
+                                    <option value="${prices.priceSingle}">singl <c:out value="${prices.priceSingle}"/></option>
                                 </c:if>
+
+
                         <%--</c:choose>--%>
                         </c:forEach>
                     </select>
@@ -315,9 +352,21 @@
                 </td>
                 <td>
                     <select name="selectedCode">
-                        <option value="1">Олачено</option>
-                        <option value="2">Не оплачено</option>
-                        <option value="3">Долг</option>
+                        <c:forEach items="${customerCardList}" var="customerCard">
+
+                                  <c:choose>
+                                      <c:when test="${student.id==customerCard.student.id}">
+                        <option disabled selected>${customerCard.status}</option>
+                                      </c:when>
+                                      <c:otherwise>
+                                          <option value="0">выбирете статус</option>
+                                      </c:otherwise>
+
+                                  </c:choose>
+                            </c:forEach>
+                        <option value="Олачено">Оплачено</option>
+                        <option value="Не оплачено">Не оплачено</option>
+                        <option value="Долг">Долг</option>
                     </select>
 
                 </td>
@@ -338,23 +387,22 @@
         </c:forEach>
         </tbody>
     </table>
-    <br>
 
     <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
-        <th>Count of participants</th>
-        <th>Count of abonements</th>
-        <th>Sum of abonements</th>
-        <th>Users with debt</th>
+
         <tr align="center">
-            <td>${countOfRecords}</td>
+            <td>all count ${countOfRecords}</td>
             <td>${countOfAbonements}</td>
             <td>${withoutName}</td>
-            <td>${withDebt}</td>
+            <td>debt ${withDebt}</td>
 
         </tr>
 
 
     </table>
+    <br>
+
+
 
 
 

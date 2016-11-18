@@ -58,6 +58,21 @@
                 <td><form:input path="priceMonth" /></td>
             </tr>
 
+            <tr>
+                <td><label>Year price:</label></td>
+                <td><form:input path="priceYear" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Individual price:</label></td>
+                <td><form:input path="priceIndividual" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Another price:</label></td>
+                <td><form:input path="priceOther" /></td>
+            </tr>
+
                 <td><label></label></td>
                 <td><input type="submit" value="Save Price" class="save" /></td>
             <td><input type="submit" value="Delete abonement" class="delete" /></td>
