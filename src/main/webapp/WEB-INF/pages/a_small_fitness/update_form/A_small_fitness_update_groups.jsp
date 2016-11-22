@@ -1,15 +1,15 @@
 <%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Add new user</title>
-    <spring:url value="/resources/css/first_work_page_forOther.css" var="style" />
-    <spring:url value="/resources/css/normalize.css" var="normalize" />
+    <spring:url value="/resources/css/first_work_page_forOther.css" var="style"/>
+    <spring:url value="/resources/css/normalize.css" var="normalize"/>
 
-    <link rel="stylesheet" type="text/css" href="${style}" >
-    <link rel="stylesheet" type="text/css" href="${normalize}" >
+    <link rel="stylesheet" type="text/css" href="${style}">
+    <link rel="stylesheet" type="text/css" href="${normalize}">
 </head>
 <body>
 <header class="header">
@@ -45,36 +45,36 @@
     <h1>Update name of group</h1>
     <br>
     <form:form action="updateGroup" modelAttribute="group" method="POST">
-        <form:hidden path="id" />
+        <form:hidden path="id"/>
         <table>
             <tbody>
             <tr>
                 <td><label>Введите новое название группы:</label></td>
-                <td><form:input path="name" /></td>
+                <td><form:input path="name"/></td>
             </tr>
 
             <tr>
-            <select name="option">
-                <option value="">выберите группу</option>
+                <select name="option">
+                    <option value="">выберите группу</option>
 
-                <c:forEach items="${groupList}" var="groups">
+                    <c:forEach items="${groupList}" var="groups">
 
-                    <option value="${groups.id}">
-                    <c:choose>
-                        <c:when test="${groups.main==true}">
-                            <c:out value="${groups.name}"/>
-                        </c:when>
-                        <c:when test="${groups.main!=true}">
-                            <c:out value="${groups.name}"/>
-                        </c:when>
-                    </c:choose>
-                    </option>
-                </c:forEach>
-            </select>
-                </tr>
+                        <option value="${groups.id}">
+                            <c:choose>
+                                <c:when test="${groups.main==true}">
+                                    <c:out value="${groups.name}"/>
+                                </c:when>
+                                <c:when test="${groups.main!=true}">
+                                    <c:out value="${groups.name}"/>
+                                </c:when>
+                            </c:choose>
+                        </option>
+                    </c:forEach>
+                </select>
+            </tr>
             <tr>
-            <td><label></label></td>
-                <td><input type="submit" value="Save" class="save" /></td>
+                <td><label></label></td>
+                <td><input type="submit" value="Save" class="save"/></td>
             </tr>
 
             </tbody>

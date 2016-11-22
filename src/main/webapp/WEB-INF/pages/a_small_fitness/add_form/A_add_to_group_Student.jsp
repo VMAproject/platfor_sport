@@ -1,14 +1,14 @@
 <%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Add new user</title>
-    <spring:url value="/resources/css/first_work_page_forOther.css" var="style" />
-    <spring:url value="/resources/css/normalize.css" var="normalize" />
+    <spring:url value="/resources/css/first_work_page_forOther.css" var="style"/>
+    <spring:url value="/resources/css/normalize.css" var="normalize"/>
 
-    <link rel="stylesheet" type="text/css" href="${style}" >
-    <link rel="stylesheet" type="text/css" href="${normalize}" >
+    <link rel="stylesheet" type="text/css" href="${style}">
+    <link rel="stylesheet" type="text/css" href="${normalize}">
 </head>
 <body>
 <header class="header">
@@ -46,44 +46,43 @@
     <br>
     <form:form action="/group/saveStudentToGroup" modelAttribute="student" method="POST">
 
-        <form:hidden path="id" />
+        <form:hidden path="id"/>
 
         <table>
             <tbody>
             <tr>
                 <td><label>Name:</label></td>
-                <td><form:input path="name" /></td>
+                <td><form:input path="name"/></td>
             </tr>
 
             <tr>
                 <td><label>SurName:</label></td>
-                <td><form:input path="surname" /></td>
+                <td><form:input path="surname"/></td>
             </tr>
 
             <tr>
                 <td><label>Phone:</label></td>
-                <td><form:input path="phone" /></td>
+                <td><form:input path="phone"/></td>
             </tr>
 
             <tr>
                 <td><label>Email:</label></td>
-                <td><form:input path="email" /></td>
+                <td><form:input path="email"/></td>
             </tr>
 
             <tr>
                 <td><label>Abonement:</label></td>
-                <%--<td><form:input path="amonement" /></td>--%>
+                    <%--<td><form:input path="amonement" /></td>--%>
             </tr>
 
             <tr>
                 <td><label>Ones:</label></td>
-            <%--//    <td><form:input path="raz" /></td>--%>
+                    <%--//    <td><form:input path="raz" /></td>--%>
             </tr>
 
 
-
             <td><label></label></td>
-            <td><input type="submit" value="Save" class="save" /></td>
+            <td><input type="submit" value="Save" class="save"/></td>
             </tr>
 
             </tbody>

@@ -1,15 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Add new user</title>
-    <spring:url value="/resources/css/first_work_page_forOther.css" var="style" />
-    <spring:url value="/resources/css/normalize.css" var="normalize" />
+    <spring:url value="/resources/css/first_work_page_forOther.css" var="style"/>
+    <spring:url value="/resources/css/normalize.css" var="normalize"/>
 
-    <link rel="stylesheet" type="text/css" href="${style}" >
-    <link rel="stylesheet" type="text/css" href="${normalize}" >
+    <link rel="stylesheet" type="text/css" href="${style}">
+    <link rel="stylesheet" type="text/css" href="${normalize}">
     <link rel="stylesheet" href="/resources/css/bootstrap.css">
 </head>
 <body>
@@ -57,13 +57,13 @@
     <spring:message code="placeholder.input.age" var="age"/>
     <%--End of placeholder intputs--%>
     <form:form action="saveStudent" modelAttribute="student" method="POST">
-        <form:hidden path="id" />
+        <form:hidden path="id"/>
 
         <table>
             <tbody>
             <tr>
                 <td><label>Имя:</label></td>
-                <td ><form:input path="name"  placeholder="${name}"/>
+                <td><form:input path="name" placeholder="${name}"/>
                     <form:errors path="name" class="alert alert-danger"></form:errors>
                 </td>
                 <td style="color: red">${moreChar}</td>
@@ -76,19 +76,22 @@
             </tr>
             <br>
             <tr>
-                <td ><label>Телефон:</label></td>
-                <td><form:input path="phone" placeholder="${phone}"/><form:errors path="phone"  class="alert alert-danger"></form:errors></td>
+                <td><label>Телефон:</label></td>
+                <td><form:input path="phone" placeholder="${phone}"/><form:errors path="phone"
+                                                                                  class="alert alert-danger"></form:errors></td>
                 <td style="color: red">${moreNumber}</td>
             </tr>
             <br>
             <tr>
                 <td><label>Email:</label></td>
-                <td><form:input path="email" placeholder="${email}"/><form:errors path="email" class="alert alert-danger"></form:errors></td>
+                <td><form:input path="email" placeholder="${email}"/><form:errors path="email"
+                                                                                  class="alert alert-danger"></form:errors></td>
             </tr>
             <br>
             <tr>
                 <td><label>Birthday:</label></td>
-                <td><form:input type="date" path="birthday" /><form:errors path="birthday" cssclass="alert alert-danger"></form:errors></td>
+                <td><form:input type="date" path="birthday"/><form:errors path="birthday"
+                                                                          cssclass="alert alert-danger"></form:errors></td>
             </tr>
             <br>
             <tr>
@@ -98,16 +101,16 @@
             </tr>
             <tr>
                 <td><label>Post:</label></td>
-                <td><form:input path="post" /></td>
+                <td><form:input path="post"/></td>
             </tr>
             <tr>
                 <td><label>Comment:</label></td>
-                <td><form:input path="comments"  /></td>
+                <td><form:input path="comments"/></td>
             </tr>
 
             <tr>
                 <td><label></label></td>
-                <td><input type="submit" value="Save" class="save" /></td>
+                <td><input type="submit" value="Save" class="save"/></td>
             </tr>
 
             </tbody>

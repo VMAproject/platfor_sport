@@ -64,7 +64,7 @@ public class A_GroupController {
         for (Student s : studentService.getAll()) {
             for (CustomerCard card : customerCardService.getAll()) {
 
-                if (card != null && card.getStudent().getId() ==s.getId()){
+                if (card != null && card.getStudent().getId() == s.getId()) {
                     customerCardsList.add(card);
                 }
             }
@@ -112,22 +112,22 @@ public class A_GroupController {
         }
 
         Group chooseGroup = groupService.getGroup(idGroup);
-            modelAndView.addObject("chooseGroup", chooseGroup);
+        modelAndView.addObject("chooseGroup", chooseGroup);
 
 
         List<Price> priceList = new ArrayList<Price>();
-        for(Price p: priceService.getAll() ){
-            if(p.getGroups().getId()!=null && p.getGroups().getId()==idGroup ){
+        for (Price p : priceService.getAll()) {
+            if (p.getGroups().getId() != null && p.getGroups().getId() == idGroup) {
                 priceList.add(p);
 
             }
         }
 
-        if(!priceList.isEmpty()){
-            modelAndView.addObject("priceList",priceList);
+        if (!priceList.isEmpty()) {
+            modelAndView.addObject("priceList", priceList);
         }
 
-        if(!customerCardsList.isEmpty()){
+        if (!customerCardsList.isEmpty()) {
             modelAndView.addObject("customerCardList", customerCardsList);
         }
         modelAndView.addObject("countOfRecords", studentsListInGroup.size());
@@ -267,13 +267,13 @@ public class A_GroupController {
         // create model attribute to bind form data
 
         List<Group> groupList = new ArrayList<>();
-        for (Group g: groupService.getAll()){
-            if(g.getUser().getId()!=null && g.getUser().getId()==getCurrentUser().getId()){
+        for (Group g : groupService.getAll()) {
+            if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
                 groupList.add(g);
             }
         }
         ModelAndView modelAndView = new ModelAndView();
-        if(!groupList.isEmpty()) {
+        if (!groupList.isEmpty()) {
             modelAndView.addObject("groupList", groupList);
         }
 
@@ -287,14 +287,14 @@ public class A_GroupController {
 
         for (int i = 0; i < ids.size(); i++) {
             Group group = groupService.getGroup(ids.get(i));
-            if(!group.getStudents().isEmpty()) {
+            if (!group.getStudents().isEmpty()) {
                 for (Student s : group.getStudents()) {
                     s.setGroups(null);
                     studentService.addStudent(s);
                 }
             }
 
-            if(group.getCategoryGroup()!=null){
+            if (group.getCategoryGroup() != null) {
                 group.setCategoryGroup(null);
                 groupService.addGroup(group);
 
@@ -315,13 +315,13 @@ public class A_GroupController {
         Group group = new Group();
 
         List<Group> groupList = new ArrayList<>();
-        for (Group g: groupService.getAll()){
-            if(g.getUser().getId()!=null && g.getUser().getId() ==getCurrentUser().getId()){
+        for (Group g : groupService.getAll()) {
+            if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
                 groupList.add(g);
             }
         }
         ModelAndView modelAndView = new ModelAndView();
-        if(!groupList.isEmpty()) {
+        if (!groupList.isEmpty()) {
             modelAndView.addObject("groupList", groupList);
         }
         modelAndView.addObject("group", group);
@@ -341,7 +341,7 @@ public class A_GroupController {
                 groupService.addGroup(g);
                 break;
             }
-            if(g.getId()==theId&& groupService.getGroup(theId).isMain()!=true){
+            if (g.getId() == theId && groupService.getGroup(theId).isMain() != true) {
                 g.setName(group.getName());
                 groupService.addGroup(g);
                 break;
@@ -357,8 +357,8 @@ public class A_GroupController {
         CategoryGroup category = new CategoryGroup();
 
         List<CategoryGroup> categoryGroupList = new ArrayList<>();
-        for(CategoryGroup c: categoryService.getAll()){
-            if(c.getUser().getId()!=null && c.getUser().getId()==getCurrentUser().getId()){
+        for (CategoryGroup c : categoryService.getAll()) {
+            if (c.getUser().getId() != null && c.getUser().getId() == getCurrentUser().getId()) {
                 categoryGroupList.add(c);
             }
         }
@@ -377,7 +377,7 @@ public class A_GroupController {
     @PostMapping("/updateCategory")
     public String updateTrainersGroup(@ModelAttribute("category") CategoryGroup category, @RequestParam("option") Long theId) {
         for (CategoryGroup c : categoryService.getAll()) {
-            if(c.getId()==theId && categoryService.getCategoryGroup(theId).isMain()==true) {
+            if (c.getId() == theId && categoryService.getCategoryGroup(theId).isMain() == true) {
                 c.setName(category.getName());
                 categoryService.addCategoryGroup(c);
             }
@@ -388,8 +388,6 @@ public class A_GroupController {
         }
         return "redirect:/group/showFormForUpdateCategory";
     }
-
-
 
 
     @RequestMapping("/addStudentToGroupForm")
@@ -406,7 +404,7 @@ public class A_GroupController {
     public String saveStudentToGroup(@ModelAttribute("student") Student theStudent, Model model) {
         Set<Group> groupSet = new HashSet<>();
         if (theStudent.getName().equals("") && theStudent.getPhone().equals("") && theStudent.getEmail().equals("")
-                 && theStudent.getSurname().equals("")) {
+                && theStudent.getSurname().equals("")) {
             model.addAttribute("nullFields", "Add at least one field");
             return "a_small_fitness/add_form/A_add_to_group_Student";
         }
@@ -493,13 +491,13 @@ public class A_GroupController {
                                     @RequestParam(value = "selectedCode", required = false) String paymentStatus) {
         if (set != null) {
 
-            Student  theStudent = new Student();
-            for(int i=0; i<ids.size();i++){
+            Student theStudent = new Student();
+            for (int i = 0; i < ids.size(); i++) {
 
                 int price2 = Integer.valueOf(price);
 
-                theStudent =studentService.getStudent(ids.get(i));
-                CustomerCard customerCard = new CustomerCard(price2,firstDte,secondDate,paymentStatus,theStudent);
+                theStudent = studentService.getStudent(ids.get(i));
+                CustomerCard customerCard = new CustomerCard(price2, firstDte, secondDate, paymentStatus, theStudent);
 
                 customerCardService.addCustomerCard(customerCard);
 
@@ -507,12 +505,7 @@ public class A_GroupController {
             }
 
 
-
-
-        }
-
-
-       else if (delete != null) {
+        } else if (delete != null) {
             if (ids != null)
 
                 for (int i = 0; i < ids.size(); i++) {
@@ -522,57 +515,57 @@ public class A_GroupController {
                 }
 
         }
-            return "redirect:/group//ShowGroupPage";
-        }
+        return "redirect:/group//ShowGroupPage";
+    }
 
-        @RequestMapping("/showFormAddOrChangePriceAbonement")
-        public  String showFormAddOrChangePrice( Model theModel){
+    @RequestMapping("/showFormAddOrChangePriceAbonement")
+    public String showFormAddOrChangePrice(Model theModel) {
 
-            Price price = new Price();
-            theModel.addAttribute("price", price);
+        Price price = new Price();
+        theModel.addAttribute("price", price);
 
-            for(Price p: priceService.getAll()){
-                if (idGroup==p.getGroups().getId()){
-                    theModel.addAttribute("price",p);
+        for (Price p : priceService.getAll()) {
+            if (idGroup == p.getGroups().getId()) {
+                theModel.addAttribute("price", p);
 
-                    break;
-                }
-
+                break;
             }
 
-            return "a_small_fitness/add_form/A_small_fitness_addOrChange_price_of_abonement";
         }
+
+        return "a_small_fitness/add_form/A_small_fitness_addOrChange_price_of_abonement";
+    }
 
     @PostMapping("/saveOrChangeAbonement")
     public String addOrChangeAbonement(@ModelAttribute("price") Price price) {
 
-        boolean flag=true;
+        boolean flag = true;
         Group group = groupService.getGroup(idGroup);
-        if(!priceService.getAll().isEmpty() ) {
-            for (Price p: priceService.getAll()){
-                if ( p!=null && idGroup == p.getGroups().getId()){
+        if (!priceService.getAll().isEmpty()) {
+            for (Price p : priceService.getAll()) {
+                if (p != null && idGroup == p.getGroups().getId()) {
                     System.out.println("in if check");
-                        p.setPriceMonth(price.getPriceMonth());
-                        p.setPriceMonthHalf(price.getPriceMonthHalf());
-                        p.setPriceSingle(price.getPriceSingle());
+                    p.setPriceMonth(price.getPriceMonth());
+                    p.setPriceMonthHalf(price.getPriceMonthHalf());
+                    p.setPriceSingle(price.getPriceSingle());
                     p.setPriceYear(price.getPriceYear());
                     p.setPriceIndividual(price.getPriceIndividual());
                     p.setPriceOther(price.getPriceOther());
-                        priceService.addPrice(p);
-                        flag=true;
-                        break;
-                    }
-                    flag=false;
+                    priceService.addPrice(p);
+                    flag = true;
+                    break;
+                }
+                flag = false;
             }
-            if (flag==false){
+            if (flag == false) {
                 price.setGroups(group);
                 price.setUser(getCurrentUser());
                 priceService.addPrice(price);
-                    flag=true;
+                flag = true;
             }
         }
 
-        if(priceService.getAll().isEmpty()) {
+        if (priceService.getAll().isEmpty()) {
             System.out.println("in is empty");
             price.setGroups(group);
             price.setUser(getCurrentUser());
@@ -580,7 +573,6 @@ public class A_GroupController {
         }
         return "redirect:/group/ShowGroupPage";
     }
-
 
 
 }

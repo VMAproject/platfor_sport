@@ -1,10 +1,6 @@
-/**
- * 
- */
 package com.sport.mvc.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,39 +18,39 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
-	@Autowired
-	UserDetailsService userDetailsService;
+    @Autowired
+    UserDetailsService userDetailsService;
 
-	@Autowired
-	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	}
+    @Autowired
+    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
 
-		http.authorizeRequests()
-				.antMatchers("A_small_fitness_first_work_Page.jsp").authenticated()
+        http.authorizeRequests()
+                .antMatchers("A_small_fitness_first_work_Page.jsp").authenticated()
 
-				.antMatchers("index.jsp").permitAll()
-				.and().formLogin().loginPage("/login")
-				.usernameParameter("username")
-				.passwordParameter("password")
+                .antMatchers("index.jsp").permitAll()
+                .and().formLogin().loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
 
-				.defaultSuccessUrl("/registerPerson/showFirstWorkPage")
+                .defaultSuccessUrl("/registerPerson/showFirstWorkPage")
 
-				.failureUrl("/login?error=1")
-				.and().csrf() //csrf enable so you need to send csrf parameter
-				.and().logout().logoutUrl("/logout")
-				.logoutSuccessUrl("/index")
-				.and().exceptionHandling().accessDeniedPage("/404");
+                .failureUrl("/login?error=1")
+                .and().csrf() //csrf enable so you need to send csrf parameter
+                .and().logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/index")
+                .and().exceptionHandling().accessDeniedPage("/404");
 
-	}
+    }
 
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }

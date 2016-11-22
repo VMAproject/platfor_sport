@@ -1,29 +1,25 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-<title>Choose Register</title>
+    <title>Choose Register</title>
     <meta charset="utf-8">
 
-    <spring:url value="/resources/css/chooseRegisterFormRegistry.css" var="style" />
-    <spring:url value="/resources/css/normalize.css" var="normalize" />
+    <spring:url value="/resources/css/chooseRegisterFormRegistry.css" var="style"/>
+    <spring:url value="/resources/css/normalize.css" var="normalize"/>
 
 
-
-    <link rel="stylesheet" type="text/css" href="${style}" >
-    <link rel="stylesheet" type="text/css" href="${normalize}" >
+    <link rel="stylesheet" type="text/css" href="${style}">
+    <link rel="stylesheet" type="text/css" href="${normalize}">
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 
 
-
-
 </head>
-
 
 
 <body>
@@ -59,10 +55,10 @@
 <!-- MAIN SECTION -->
 <main>
 
-  <h3>
-    Let's get started!
-    First, tell us what you're looking for.
-  </h3>
+    <h3>
+        Let's get started!
+        First, tell us what you're looking for.
+    </h3>
 
     <table class="table">
         <thead>
@@ -71,7 +67,7 @@
         <tbody>
         <tr class="active">
             <td>I want to register like a trainer</td>
-            <td><a href="/home"> REGISTER </a> </td>
+            <td><a href="/home"> REGISTER </a></td>
         </tr>
         <tr class="success">
             <td>I want to register as a fitness center</td>
@@ -79,7 +75,7 @@
         </tr>
         <tr class="info">
             <td>I want to register as a guest</td>
-            <td><a href="/registerPerson/registerGuest"> REGISTER </a> </td>
+            <td><a href="/registerPerson/registerGuest"> REGISTER </a></td>
         </tr>
         <tr class="warning">
             <td>I want to register as a studio or sports section</td>
@@ -93,28 +89,25 @@
     <%--<div class="container-first">--%>
 
 
-                    <%--<h3></h3>--%>
+    <%--<h3></h3>--%>
 
 
-                  <%--<h3>  <a href="/registerPerson/general_registration_form"> REGISTER</a></h3>--%>
+    <%--<h3>  <a href="/registerPerson/general_registration_form"> REGISTER</a></h3>--%>
 
 
+    <%--<h3>I want to register  like a finnes Center</h3>--%>
 
-                    <%--<h3>I want to register  like a finnes Center</h3>--%>
-
-                            <%--<button ><a href="/registerPerson/showForm">REGISTER</a></button>--%>
-
+    <%--<button ><a href="/registerPerson/showForm">REGISTER</a></button>--%>
 
 
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--</div>--%>
 
 
     <%--</div>--%>
 
-    </main>
+</main>
 <!-- /MAIN SECTION -->
 <!-- FOOTER -->
 <footer class="footer">

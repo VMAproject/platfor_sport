@@ -22,67 +22,67 @@ import java.util.Map;
 @Controller
 //@RequestMapping("loginController")
 public class LoginController {
-	
-	@Autowired
-	UserService userservice;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+    @Autowired
+    UserService userservice;
 
-	@RequestMapping("/login_dop")
-	public String ShowLogin(){
-		return "login_dop";
-	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @RequestMapping("/login_dop")
+    public String ShowLogin() {
+        return "login_dop";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
         return "login";
     }
-	
-	@ResponseBody
-	@RequestMapping(value="/registration", method = RequestMethod.POST)
-	public Map<String, Object> registration(@RequestBody User user) {
 
-		Map<String, Object> response= new HashMap<String, Object>();
+    @ResponseBody
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public Map<String, Object> registration(@RequestBody User user) {
+
+        Map<String, Object> response = new HashMap<String, Object>();
 
         Role role = new Role();
         role.setId(Long.valueOf(1));
 
-		user.setRole(role);
-		user.setIsactive("Y");
-		user.setIsnonexpired("Y");
-		user.setIsnonlocked("Y");
+        user.setRole(role);
+        user.setIsactive("Y");
+        user.setIsnonexpired("Y");
+        user.setIsnonlocked("Y");
 
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
 
         Boolean save = userservice.addUser(user);
 
         if (save) {
-			response.put("suceess", true);
-	        response.put("message", "Регистрация прошла успешно");
-			return response;
-		}else {
+            response.put("suceess", true);
+            response.put("message", "Регистрация прошла успешно");
+            return response;
+        } else {
             response.put("error", true);
-	        response.put("message", "Регистрация не прошла выполните необходимые условия");
-			return response;
-		}
-	}
+            response.put("message", "Регистрация не прошла выполните необходимые условия");
+            return response;
+        }
+    }
 
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){    
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-		return "redirect:/index";
+        return "redirect:/index";
     }
 
 
-	private User parseUserFromRequest(Map<String, String> parameters) {
-		User user = new User();
-		user.setUsername(parameters.get("username"));
-		return user;
-	}
+    private User parseUserFromRequest(Map<String, String> parameters) {
+        User user = new User();
+        user.setUsername(parameters.get("username"));
+        return user;
+    }
 
 }

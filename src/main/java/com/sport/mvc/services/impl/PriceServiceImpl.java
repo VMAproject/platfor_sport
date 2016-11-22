@@ -26,7 +26,7 @@ public class PriceServiceImpl implements PriceService {
     @Override
     @Transactional
     public void addPrice(Price price) {
-  priceDao.add(price);
+        priceDao.add(price);
     }
 
     @Override

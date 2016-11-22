@@ -15,11 +15,9 @@ public class StartController {
 
     //returns choose registration form page
     @RequestMapping("/showChooseRegisterForm")
-    public String showChooseForm(){
+    public String showChooseForm() {
         return "chooseRegisterFormRegistry";
     }
-
-
 
 
 }

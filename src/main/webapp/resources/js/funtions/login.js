@@ -1,71 +1,71 @@
 /*$('.message a').click(function(){
-   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-});*/
+ $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+ });*/
 
 /*
  * this method create for toggle visible sign in form 
  * and registration form on login page 
  */
 function toggle_visibility() {
-	$('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
 }
 
 /*
  * registration function with jquery ajax 
  */
-$(document).ready(function($) {
-	$("#registerForm").submit(function(event) {
-		
-		event.preventDefault();
-		var data = {}
-		data["username"]   = $("#username").val(),
-		data["password"]   = $("#password").val(),
-		data["email"] 	   = $("#email").val(),
+$(document).ready(function ($) {
+    $("#registerForm").submit(function (event) {
 
-			data["name"]		=$("#name").val(),
-			data["surname"]		=$("#surname").val(),
-			data["birthday"]	=$("#birthday").val(),
-			data["phone"]		=$("#phone").val(),
-			data["city"]		=$("#city").val(),
-			data["country"]		=$("#country").val(),
-			data["district"]	=$("#district").val(),
-			data["birthday"] =$("#birthday").val(),
+        event.preventDefault();
+        var data = {}
+        data["username"] = $("#username").val(),
+            data["password"] = $("#password").val(),
+            data["email"] = $("#email").val(),
 
-		url = "registration";
-		
-		var token = $('#csrfToken').val();
-		var header = $('#csrfHeader').val();
-		/*
-		 * if in spring aplication csrf enable
-		 * send csrf parameter in header otherwise 405 error
-		 */
-		$.ajax({
-			type 	 : "POST",
-			url      : url,
-			data 	 : JSON.stringify(data),
-			dataType : 'json',
-			beforeSend: function(xhr) {
-		        xhr.setRequestHeader("Accept", "application/json");
-		        xhr.setRequestHeader("Content-Type", "application/json");
-		        xhr.setRequestHeader(header, token);
-		    },
+            data["name"] = $("#name").val(),
+            data["surname"] = $("#surname").val(),
+            data["birthday"] = $("#birthday").val(),
+            data["phone"] = $("#phone").val(),
+            data["city"] = $("#city").val(),
+            data["country"] = $("#country").val(),
+            data["district"] = $("#district").val(),
+            data["birthday"] = $("#birthday").val(),
 
-			success  : function(resonse) {
-				var message = "Регистрация прошла успешно";
-				//				$("#msg").html(data.message);
-				console.log(resonse.data);
-				alert(resonse.message);
-				data = null;
-				document.getElementById("registerForm").reset()
-			},
-			error 	 : function(e) {
-				console.log("ERROR: ",e);
-				alert("Ошибка регистрации. Поле логин пустое или данный логин существует");
+            url = "registration";
+
+        var token = $('#csrfToken').val();
+        var header = $('#csrfHeader').val();
+        /*
+         * if in spring aplication csrf enable
+         * send csrf parameter in header otherwise 405 error
+         */
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify(data),
+            dataType: 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader(header, token);
+            },
+
+            success: function (resonse) {
+                var message = "Регистрация прошла успешно";
+                //				$("#msg").html(data.message);
+                console.log(resonse.data);
+                alert(resonse.message);
+                data = null;
+                document.getElementById("registerForm").reset()
+            },
+            error: function (e) {
+                console.log("ERROR: ", e);
+                alert("Ошибка регистрации. Поле логин пустое или данный логин существует");
 //						$("#msg").html(e.message);
-				data = null;
-				document.getElementById("registerForm").reset()
-			}
-		});
-		
-	});
+                data = null;
+                document.getElementById("registerForm").reset()
+            }
+        });
+
+    });
 });
