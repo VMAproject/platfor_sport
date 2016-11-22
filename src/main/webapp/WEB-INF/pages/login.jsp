@@ -23,13 +23,10 @@
         </font>
         <form class="register-form" id="registerForm" action="#" method="post">
             <input type="text" placeholder="Login" id="username" autocomplete="off" onkeyup="checkLogin(this.value)"/>
-            <span id="e_login"
-                  style="display: none; color: #c00;">Логин введён неправильно. Минимум 5 символов</span></p>
+            <span id="e_login" style="display: none; color: #c00;">Логин введён неправильно. Минимум 5 символов</span></p>
             <input type="password" placeholder="Password" id="password" onkeyup="checkPassword(this.value)"/>
-            <span id="e_password"
-                  style="display: none; color: #c00;">Пароль введён неправильно. Минимум 5 символов</span></p>
-            <input type="email" placeholder="email address" id="email" autocomplete="off"
-                   onkeyup="checkEmail(this.value)"/>
+            <span id="e_password" style="display: none; color: #c00;">Пароль введён неправильно. Минимум 5 символов</span></p>
+            <input type="email" placeholder="email address" id="email" autocomplete="off" onkeyup="checkEmail(this.value)"/>
             <span id="e_email" style="display: none; color: #c00;">Проверте правильность ввода данных </span></p>
 
 
