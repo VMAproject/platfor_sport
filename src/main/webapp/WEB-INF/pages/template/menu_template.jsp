@@ -9,6 +9,23 @@
 <html>
 <head>
     <title>Template menu</title>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <spring:url value="/resources/script/js.js" var="js"/>
+    <%--<spring:url value="/resources/css/first_work_page_for_cabinet.css" var="style" />--%>
+    <spring:url value="/resources/css/page_for_group_menu.css" var="style"/>
+    <spring:url value="/resources/css/normalize.css" var="normalize"/>
+    <spring:url value="/resources/css/tableStyle.css" var="tableStyle"/>
+
+    <script src="<c:url value="/resources/script/js.js" />"></script>
+    <link rel="stylesheet" type="text/css" href="${style}">
+    <link rel="stylesheet" type="text/css" href="${normalize}">
+    <link rel="stylesheet" type="text/css" href="${tableStyle}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <script type="text/javascript" src="/resources/script/bootstrap.min.js"></script>
+
 </head>
 <body>
 
