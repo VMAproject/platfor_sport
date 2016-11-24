@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.ws.RequestWrapper;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -58,7 +59,7 @@ public class A_GroupController {
         //create list student,category of group and group for add data to the jsp page
         List<CategoryGroup> categoryGroupList = new ArrayList<>();
         List<Group> groupsList = new ArrayList<>();
-        List<Student> studentsListInGroup = new ArrayList<>();
+        List<Student> studentsListInGroup;
         List<CustomerCard> customerCardsList = new ArrayList<>();
 
         for (Student s : studentService.getAll()) {
@@ -70,18 +71,24 @@ public class A_GroupController {
             }
         }
 
-        for (Student s : studentService.getAll()) {
-//check, if user has this student, add to student list
-            if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId()) {
+        //check, if user has this student, add to student list
 //check in which og group the students
-                if (s.getGroups().iterator().hasNext() && s.getGroups().iterator().next().getId() == idGroup) {
-
-                    studentsListInGroup.add(s);
-                }
-            }
-
-
-        }
+        studentsListInGroup = studentService
+                .getAll()
+                .stream()
+                .filter(s -> s
+                        .getUser()
+                        .getId() != null && s
+                        .getUser()
+                        .getId() == getCurrentUser()
+                        .getId())
+                .filter(s -> s
+                        .getGroups()
+                        .iterator()
+                        .hasNext() && s
+                        .getGroups()
+                        .iterator()
+                        .next().getId() == idGroup).collect(Collectors.toList());
 
         for (Group g : groupService.getAll()) {
             if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
