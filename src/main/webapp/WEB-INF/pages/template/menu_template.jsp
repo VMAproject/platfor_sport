@@ -1,36 +1,17 @@
-<%@attribute name="header" fragment="true" %>
-<%@attribute name="navigate" fragment="true" %>
-<%@attribute name="footer" fragment="true" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
+<%--
+  Created by IntelliJ IDEA.
+  User: Mixas
+  Date: 24.11.2016
+  Time: 21:47
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title> First Work Page</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-    <spring:url value="/resources/script/js.js" var="js"/>
-    <%--<spring:url value="/resources/css/first_work_page_for_cabinet.css" var="style" />--%>
-    <spring:url value="/resources/css/page_for_group_menu.css" var="style"/>
-    <spring:url value="/resources/css/normalize.css" var="normalize"/>
-    <spring:url value="/resources/css/tableStyle.css" var="tableStyle"/>
-
-    <script src="<c:url value="/resources/script/js.js" />"></script>
-    <link rel="stylesheet" type="text/css" href="${style}">
-    <link rel="stylesheet" type="text/css" href="${normalize}">
-    <link rel="stylesheet" type="text/css" href="${tableStyle}">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    <script type="text/javascript" src="/resources/script/bootstrap.min.js"></script>
-    <jsp:invoke fragment="header"/>
+    <title>Template menu</title>
 </head>
-
-
 <body>
+
 <SCRIPT language="javascript">
     $.noConflict();
     $(function () {
@@ -197,10 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 
 
-<footer class="footer">
-    <div class="container">
 
-    </div>
-</footer>
+
 </body>
 </html>
