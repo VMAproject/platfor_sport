@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="/resources/css/bootstrap.css">
 </head>
 <body>
+
+
+
 <header class="header">
     <div class="container">
         <h1>World Sport Platform BF 1.0</h1>
@@ -21,14 +24,16 @@
         </h2>
     </div>
 </header>
+
+<%--&lt;%&ndash;<%@include file="../../template/menu_template.jsp" %>&ndash;%&gt;  для вставки отдельного меню--%>
 <!-- /HEADER -->
 <!-- NAVIGATION -->
 <nav class="page-navigation">
     <div class="container">
         <ul>
-            <li><a href="#">Главная</a></li>
-            <li><a href="/group/ShowGroupPage">Группы</a></li>
-            <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>
+            <li><a href="#">Главная</a></li>--%>
+            <li><a href="/group/ShowGroupPage">Группы</a></li>--%>
+            <li><a href="/registerPerson/showFirstWorkPage">Кабинет</a></li>--%>
             <%--<li><a href="#">Просмотр моей страници</a></li>--%>
             <%--<li><a href="#">Статистика</a></li>--%>
             <%--<li><a href="#">Расчеты</a></li>--%>
