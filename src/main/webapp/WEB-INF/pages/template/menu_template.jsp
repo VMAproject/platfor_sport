@@ -1,11 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Mixas
-  Date: 24.11.2016
-  Time: 21:47
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+
 <html>
 <head>
     <title>Template menu</title>
@@ -164,6 +161,7 @@
                 <%--// Empty li--%>
                 <li><a href="#">.....</a></li>
                 <%--//show new creating groups--%>
+
                 <c:forEach items="${groupsList}" var="groups">
                     <%--// check, if groups don't belongs some of category, the show it--%>
                     <c:if test="${groups.categoryGroup.id==null && groups.main!=true}">
