@@ -291,6 +291,7 @@
 
                     <select name="selectedPrice">
 
+<<<<<<< Updated upstream
                             <%--//get price for student from db--%>
                         <c:forEach items="${customerCardList}" var="customerCard">
 
@@ -306,6 +307,24 @@
                             <%--</c:if>--%>
 
 
+=======
+                        <%--//get price for student from db--%>
+                        <c:forEach items="${customerCardList}" var="customerCard">
+
+                               <%--<c:choose>--%>
+
+                                <c:if test="${student.id==customerCard.student.id}">
+                                    <option >${customerCard.price}</option>
+                                </c:if>
+
+
+                            <%--<c:if test="${student.id!=customerCard.student.id }">--%>
+                                <%--<option >abonement price</option>--%>
+                            <%--</c:if>--%>
+
+
+
+>>>>>>> Stashed changes
                             <%--</c:choose>--%>
 
                         </c:forEach>
@@ -314,6 +333,7 @@
                             <%--<c:choose>--%>
                             <%--//--%>
                             <c:if test="${prices.priceOther!=0}">
+<<<<<<< Updated upstream
                                 <option value="${prices.priceOther}">other <c:out
                                         value="${prices.priceOther}"/></option>
                             </c:if>
@@ -321,6 +341,13 @@
                             <c:if test="${prices.priceIndividual!=0}">
                                 <option value="${prices.priceIndividual}">individual <c:out
                                         value="${prices.priceIndividual}"/></option>
+=======
+                                <option value="${prices.priceOther}">other <c:out value="${prices.priceOther}"/></option>
+                            </c:if>
+
+                            <c:if test="${prices.priceIndividual!=0}">
+                                <option value="${prices.priceIndividual}">individual <c:out value="${prices.priceIndividual}"/></option>
+>>>>>>> Stashed changes
                             </c:if>
 
                             <c:if test="${prices.priceYear!=0}">
@@ -328,6 +355,7 @@
                             </c:if>
 
                             <c:if test="${prices.priceMonth!=0}">
+<<<<<<< Updated upstream
                                 <option value="${prices.priceMonth}">month <c:out
                                         value="${prices.priceMonth}"/></option>
                             </c:if>
@@ -344,6 +372,21 @@
 
 
                             <%--</c:choose>--%>
+=======
+                            <option value="${prices.priceMonth}">month <c:out value="${prices.priceMonth}"/></option>
+                            </c:if>
+
+                                <c:if test="${prices.priceMonthHalf!=0}">
+                                    <option value="${prices.priceMonthHalf}">half month <c:out value="${prices.priceMonthHalf}"/></option>
+                                </c:if>
+
+                                <c:if test="${prices.priceSingle!=0}">
+                                    <option value="${prices.priceSingle}">singl <c:out value="${prices.priceSingle}"/></option>
+                                </c:if>
+
+
+                        <%--</c:choose>--%>
+>>>>>>> Stashed changes
                         </c:forEach>
                     </select>
 
@@ -351,7 +394,11 @@
 
                 <td></td>
                 <td>
+<<<<<<< Updated upstream
                     <input type="date" name="selectedStartDate">
+=======
+                   <input type="date" name="selectedStartDate">
+>>>>>>> Stashed changes
                 </td>
 
                 <td>
@@ -361,6 +408,7 @@
                     <select name="selectedCode">
                         <c:forEach items="${customerCardList}" var="customerCard">
 
+<<<<<<< Updated upstream
                             <c:choose>
                                 <c:when test="${student.id==customerCard.student.id}">
                                     <option disabled selected>${customerCard.status}</option>
@@ -371,6 +419,18 @@
 
                             </c:choose>
                         </c:forEach>
+=======
+                                  <c:choose>
+                                      <c:when test="${student.id==customerCard.student.id}">
+                        <option disabled selected>${customerCard.status}</option>
+                                      </c:when>
+                                      <c:otherwise>
+                                          <option value="0">выбирете статус</option>
+                                      </c:otherwise>
+
+                                  </c:choose>
+                            </c:forEach>
+>>>>>>> Stashed changes
                         <option value="Олачено">Оплачено</option>
                         <option value="Не оплачено">Не оплачено</option>
                         <option value="Долг">Долг</option>
@@ -378,8 +438,13 @@
 
                 </td>
                 <td><input type="submit" name="set" value="OK"></td>
+<<<<<<< Updated upstream
                 <td><input type="radio"></td>
                 <td><input type="checkbox" class="case" , name="case" value="${student.id}"></td>
+=======
+                <td > <input type="radio"></td>
+                <td><input type="checkbox" class="case", name="case" value="${student.id}"></td>
+>>>>>>> Stashed changes
                 <td>
                     <!-- construct an "update" link with customer id -->
                     <c:url var="updateLink" value="/registerPerson/showFormForUpdate">
@@ -395,7 +460,11 @@
         </tbody>
     </table>
 
+<<<<<<< Updated upstream
     <table border="3" width="100%" cellpadding="4" cellpacing="3">
+=======
+    <table border="3"  width="100%"   cellpadding="4" cellpacing="3">
+>>>>>>> Stashed changes
 
         <tr align="center">
             <td>all count ${countOfRecords}</td>
@@ -410,6 +479,13 @@
     <br>
 
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+>>>>>>> Stashed changes
     </form>
 
 

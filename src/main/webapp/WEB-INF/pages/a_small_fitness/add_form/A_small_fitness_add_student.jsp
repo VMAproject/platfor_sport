@@ -68,7 +68,11 @@
             <tbody>
             <tr>
                 <td><label>Имя:</label></td>
+<<<<<<< Updated upstream
                 <td><form:input path="name" placeholder="${name}"/>
+=======
+                <td ><form:input path="name"  placeholder="${name}"/>
+>>>>>>> Stashed changes
                     <form:errors path="name" class="alert alert-danger"></form:errors>
                 </td>
                 <td style="color: red">${moreChar}</td>
@@ -81,22 +85,35 @@
             </tr>
             <br>
             <tr>
+<<<<<<< Updated upstream
                 <td><label>Телефон:</label></td>
                 <td><form:input path="phone" placeholder="${phone}"/><form:errors path="phone"
                                                                                   class="alert alert-danger"></form:errors></td>
+=======
+                <td ><label>Телефон:</label></td>
+                <td><form:input path="phone" placeholder="${phone}"/><form:errors path="phone"  class="alert alert-danger"></form:errors></td>
+>>>>>>> Stashed changes
                 <td style="color: red">${moreNumber}</td>
             </tr>
             <br>
             <tr>
                 <td><label>Email:</label></td>
+<<<<<<< Updated upstream
                 <td><form:input path="email" placeholder="${email}"/><form:errors path="email"
                                                                                   class="alert alert-danger"></form:errors></td>
+=======
+                <td><form:input path="email" placeholder="${email}"/><form:errors path="email" class="alert alert-danger"></form:errors></td>
+>>>>>>> Stashed changes
             </tr>
             <br>
             <tr>
                 <td><label>Birthday:</label></td>
+<<<<<<< Updated upstream
                 <td><form:input type="date" path="birthday"/><form:errors path="birthday"
                                                                           cssclass="alert alert-danger"></form:errors></td>
+=======
+                <td><form:input type="date" path="birthday" /><form:errors path="birthday" cssclass="alert alert-danger"></form:errors></td>
+>>>>>>> Stashed changes
             </tr>
             <br>
             <tr>

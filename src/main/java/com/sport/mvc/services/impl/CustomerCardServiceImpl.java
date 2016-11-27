@@ -2,6 +2,10 @@ package com.sport.mvc.services.impl;
 
 import com.sport.mvc.dao.CustomerCardDao;
 import com.sport.mvc.models.CustomerCard;
+<<<<<<< Updated upstream
+=======
+import com.sport.mvc.models.Student;
+>>>>>>> Stashed changes
 import com.sport.mvc.services.CustomerCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,7 +30,11 @@ public class CustomerCardServiceImpl implements CustomerCardService {
     @Transactional
     @Override
     public void addCustomerCard(CustomerCard customerCard) {
+<<<<<<< Updated upstream
         customerCardDao.add(customerCard);
+=======
+customerCardDao.add(customerCard);
+>>>>>>> Stashed changes
     }
 
     @Transactional
