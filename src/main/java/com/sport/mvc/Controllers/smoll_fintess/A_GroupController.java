@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.ws.RequestWrapper;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -59,22 +58,8 @@ public class A_GroupController {
         //create list student,category of group and group for add data to the jsp page
         List<CategoryGroup> categoryGroupList = new ArrayList<>();
         List<Group> groupsList = new ArrayList<>();
-<<<<<<< Updated upstream
-        List<Student> studentsListInGroup;
-        List<CustomerCard> customerCardsList = new ArrayList<>();
-=======
         List<Student> studentsListInGroup = new ArrayList<>();
         List<CustomerCard> customerCardsList = new ArrayList<>();
-
-        for (Student s : studentService.getAll()) {
-            for (CustomerCard card : customerCardService.getAll()) {
-
-                if (card != null && card.getStudent().getId() ==s.getId()){
-                    customerCardsList.add(card);
-                }
-            }
-        }
->>>>>>> Stashed changes
 
         for (Student s : studentService.getAll()) {
             for (CustomerCard card : customerCardService.getAll()) {
@@ -85,24 +70,18 @@ public class A_GroupController {
             }
         }
 
-        //check, if user has this student, add to student list
+        for (Student s : studentService.getAll()) {
+//check, if user has this student, add to student list
+            if (s.getUser().getId() != null && s.getUser().getId() == getCurrentUser().getId()) {
 //check in which og group the students
-        studentsListInGroup = studentService
-                .getAll()
-                .stream()
-                .filter(s -> s
-                        .getUser()
-                        .getId() != null && s
-                        .getUser()
-                        .getId() == getCurrentUser()
-                        .getId())
-                .filter(s -> s
-                        .getGroups()
-                        .iterator()
-                        .hasNext() && s
-                        .getGroups()
-                        .iterator()
-                        .next().getId() == idGroup).collect(Collectors.toList());
+                if (s.getGroups().iterator().hasNext() && s.getGroups().iterator().next().getId() == idGroup) {
+
+                    studentsListInGroup.add(s);
+                }
+            }
+
+
+        }
 
         for (Group g : groupService.getAll()) {
             if (g.getUser().getId() != null && g.getUser().getId() == getCurrentUser().getId()) {
@@ -133,39 +112,22 @@ public class A_GroupController {
         }
 
         Group chooseGroup = groupService.getGroup(idGroup);
-<<<<<<< Updated upstream
         modelAndView.addObject("chooseGroup", chooseGroup);
 
 
         List<Price> priceList = new ArrayList<Price>();
         for (Price p : priceService.getAll()) {
             if (p.getGroups().getId() != null && p.getGroups().getId() == idGroup) {
-=======
-            modelAndView.addObject("chooseGroup", chooseGroup);
-
-
-        List<Price> priceList = new ArrayList<Price>();
-        for(Price p: priceService.getAll() ){
-            if(p.getGroups().getId()!=null && p.getGroups().getId()==idGroup ){
->>>>>>> Stashed changes
                 priceList.add(p);
 
             }
         }
 
-<<<<<<< Updated upstream
         if (!priceList.isEmpty()) {
             modelAndView.addObject("priceList", priceList);
         }
 
         if (!customerCardsList.isEmpty()) {
-=======
-        if(!priceList.isEmpty()){
-            modelAndView.addObject("priceList",priceList);
-        }
-
-        if(!customerCardsList.isEmpty()){
->>>>>>> Stashed changes
             modelAndView.addObject("customerCardList", customerCardsList);
         }
         modelAndView.addObject("countOfRecords", studentsListInGroup.size());
@@ -442,11 +404,7 @@ public class A_GroupController {
     public String saveStudentToGroup(@ModelAttribute("student") Student theStudent, Model model) {
         Set<Group> groupSet = new HashSet<>();
         if (theStudent.getName().equals("") && theStudent.getPhone().equals("") && theStudent.getEmail().equals("")
-<<<<<<< Updated upstream
                 && theStudent.getSurname().equals("")) {
-=======
-                 && theStudent.getSurname().equals("")) {
->>>>>>> Stashed changes
             model.addAttribute("nullFields", "Add at least one field");
             return "a_small_fitness/add_form/A_add_to_group_Student";
         }
@@ -533,7 +491,6 @@ public class A_GroupController {
                                     @RequestParam(value = "selectedCode", required = false) String paymentStatus) {
         if (set != null) {
 
-<<<<<<< Updated upstream
             Student theStudent = new Student();
             for (int i = 0; i < ids.size(); i++) {
 
@@ -549,28 +506,6 @@ public class A_GroupController {
 
 
         } else if (delete != null) {
-=======
-            Student  theStudent = new Student();
-            for(int i=0; i<ids.size();i++){
-
-                int price2 = Integer.valueOf(price);
-
-                theStudent =studentService.getStudent(ids.get(i));
-                CustomerCard customerCard = new CustomerCard(price2,firstDte,secondDate,paymentStatus,theStudent);
-
-                customerCardService.addCustomerCard(customerCard);
-
-
-            }
-
-
-
-
-        }
-
-
-       else if (delete != null) {
->>>>>>> Stashed changes
             if (ids != null)
 
                 for (int i = 0; i < ids.size(); i++) {
@@ -610,7 +545,6 @@ public class A_GroupController {
             for (Price p : priceService.getAll()) {
                 if (p != null && idGroup == p.getGroups().getId()) {
                     System.out.println("in if check");
-<<<<<<< Updated upstream
                     p.setPriceMonth(price.getPriceMonth());
                     p.setPriceMonthHalf(price.getPriceMonthHalf());
                     p.setPriceSingle(price.getPriceSingle());
@@ -622,19 +556,6 @@ public class A_GroupController {
                     break;
                 }
                 flag = false;
-=======
-                        p.setPriceMonth(price.getPriceMonth());
-                        p.setPriceMonthHalf(price.getPriceMonthHalf());
-                        p.setPriceSingle(price.getPriceSingle());
-                    p.setPriceYear(price.getPriceYear());
-                    p.setPriceIndividual(price.getPriceIndividual());
-                    p.setPriceOther(price.getPriceOther());
-                        priceService.addPrice(p);
-                        flag=true;
-                        break;
-                    }
-                    flag=false;
->>>>>>> Stashed changes
             }
             if (flag == false) {
                 price.setGroups(group);
