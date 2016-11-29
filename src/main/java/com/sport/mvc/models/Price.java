@@ -35,11 +35,6 @@ public class Price extends Model {
     @Column(name = "price_other")
     private int priceOther;
 
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
 
     @OneToMany(mappedBy = "price", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CustomerCard> cards = new HashSet<>();

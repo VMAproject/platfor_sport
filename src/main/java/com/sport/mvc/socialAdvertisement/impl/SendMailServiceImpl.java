@@ -21,7 +21,7 @@ public class SendMailServiceImpl implements SendMailService {
 
     @Override
     @Transactional
-    public void sendMailTo(String mail, String subjectTo, String bodyTo, String emailFrom, String passwordFrom)
+    public void sendMailTo(String mail, String subjectTo, String bodyTo, final String emailFrom, final String passwordFrom)
             throws AddressException, MessagingException {
         subject = subjectTo;
         body = bodyTo;
